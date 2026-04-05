@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบเสนอโครงการ EduSmart Dashboard - A4</title>
+    <title>แบบเสนอโครงการ EduSmart Dashboard - A4 Final</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,304 +13,313 @@
             --primary-color: #1e3a8a;
             --secondary-color: #3b82f6;
         }
+        
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+        }
+
         body {
             font-family: 'Prompt', sans-serif;
-            background-color: #e5e7eb;
+            background-color: #f3f4f6;
             margin: 0;
-            padding: 20px 0;
+            padding: 0;
             color: #1f2937;
         }
-        /* A4 Page Styling */
+
+        /* A4 Logic */
         .page {
             width: 210mm;
-            min-height: 297mm;
-            padding: 25mm 20mm;
-            margin: 0 auto 20px auto;
+            height: 296.8mm; /* ปรับลดเล็กน้อยกัน Error ของ Browser */
+            padding: 20mm 20mm;
+            margin: 20px auto;
             background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
             position: relative;
-            box-sizing: border-box;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
+
+        /* Print Settings */
         @media print {
-            body { background: none; padding: 0; margin: 0; }
-            .page { 
-                margin: 0; 
-                box-shadow: none; 
-                width: 210mm;
-                height: 297mm;
-                page-break-after: always;
+            @page {
+                size: A4;
+                margin: 0;
             }
-            .no-print { display: none; }
+            body {
+                background: none;
+                padding: 0;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                break-after: page; /* บังคับขึ้นหน้าใหม่ */
+            }
+            .no-print {
+                display: none !important;
+            }
         }
-        .content-section { margin-bottom: 24px; }
+
         .section-title {
-            font-size: 1.125rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: var(--primary-color);
             border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 4px;
-            margin-bottom: 16px;
+            padding-bottom: 6px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
         }
+
         .section-number {
             background-color: var(--primary-color);
             color: white;
-            padding: 2px 8px;
+            padding: 2px 10px;
             border-radius: 4px;
-            margin-right: 10px;
-            font-size: 0.875rem;
+            margin-right: 12px;
+            font-size: 0.9rem;
         }
-        table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
-        th, td { border: 1px solid #d1d5db; padding: 8px 12px; }
-        th { background-color: #f9fafb; font-weight: 600; text-align: center; }
-        .checkbox-item { display: flex; align-items: center; margin-bottom: 4px; font-size: 0.9rem; }
-        .checked-box { color: var(--secondary-color); font-weight: bold; margin-right: 8px; font-size: 1.2rem; }
-        .unchecked-box { color: #d1d5db; margin-right: 8px; font-size: 1.2rem; }
-        p, li { line-height: 1.6; font-size: 0.95rem; text-align: justify; }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            border: 1px solid #9ca3af;
+            padding: 10px 12px;
+        }
+
+        th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+        }
+
+        .footer-page {
+            position: absolute;
+            bottom: 15mm;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 10pt;
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        p, li {
+            line-height: 1.6;
+            font-size: 10.5pt;
+        }
+
+        .checkbox-custom {
+            font-size: 1.3rem;
+            line-height: 1;
+            margin-right: 8px;
+        }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Instructions Bar (No Print) -->
-    <div class="max-w-[210mm] mx-auto mb-4 no-print px-4 sm:px-0">
-        <div class="bg-white p-4 rounded-lg shadow-sm flex flex-col md:flex-row justify-between items-center gap-4 border-l-4 border-blue-600">
+    <nav class="no-print bg-white border-b sticky top-0 z-50 p-4 shadow-sm">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
             <div>
-                <h4 class="font-bold text-gray-800">ตัวอย่างเอกสารสำหรับพิมพ์ (A4 Layout)</h4>
-                <p class="text-xs text-gray-500">กรุณากด <kbd class="bg-gray-100 px-1 rounded border">Ctrl + P</kbd> เพื่อบันทึกเป็น PDF หรือพิมพ์รายงาน</p>
+                <h1 class="font-bold text-blue-900">EduSmart Dashboard Export</h1>
+                <p class="text-xs text-gray-500">ตรวจสอบความเรียบร้อยก่อนพิมพ์</p>
             </div>
-            <button onclick="window.print()" class="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 transition shadow-sm">พิมพ์เอกสาร</button>
+            <button onclick="window.print()" class="bg-blue-700 hover:bg-blue-800 text-white px-5 py-2 rounded-lg font-medium transition flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                พิมพ์หรือบันทึก PDF
+            </button>
         </div>
-    </div>
+    </nav>
 
-    <!-- PAGE 1: Intro & Basic Info -->
-    <div class="page shadow-xl">
-        <!-- Header Image Placeholder / Symbol -->
+    <div class="page">
         <div class="text-center mb-10">
-            <h1 class="text-2xl font-bold text-gray-900 uppercase">แบบฟอร์มข้อเสนอโครงการ</h1>
-            <p class="text-lg font-semibold text-blue-800 mt-2">OBEC HACKATHON 2026 : FUTURE SCHOOL INNOVATION</p>
-            <p class="text-gray-500 italic mt-1 font-light">"ปลุกพลังนวัตกรรม เปลี่ยนห้องเรียนสู่โรงเรียนแห่งอนาคต"</p>
+            <h1 class="text-3xl font-bold text-gray-900">แบบฟอร์มข้อเสนอโครงการ</h1>
+            <p class="text-xl font-semibold text-blue-700 mt-2">OBEC HACKATHON 2026 : FUTURE SCHOOL INNOVATION</p>
+            <div class="w-24 h-1 bg-blue-600 mx-auto mt-4"></div>
         </div>
 
-        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 mb-8 grid grid-cols-3 gap-2 text-sm">
-            <div class="col-span-1 font-bold text-gray-600">ประเภทนวัตกรรม:</div>
-            <div class="col-span-2">นวัตกรรมปัญญาประดิษฐ์ (AI) ด้านบริหารจัดการสถานศึกษา</div>
-            <div class="col-span-1 font-bold text-gray-600">ชื่อโครงการ:</div>
-            <div class="col-span-2 font-bold text-blue-700 underline">EduSmart Dashboard (ระบบ AI Dashboard เพื่อบริหารจัดการสถานศึกษาอัจฉริยะ)</div>
-            <div class="col-span-1 font-bold text-gray-600">สถานศึกษา:</div>
-            <div class="col-span-2">โรงเรียนหารเทารังสีประชาสรรค์ สพม.พัทลุง</div>
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 space-y-3">
+            <div class="flex"><span class="w-32 font-bold text-gray-600 text-sm">ประเภทนวัตกรรม:</span> <span class="text-sm">นวัตกรรมปัญญาประดิษฐ์ (AI) ด้านบริหารจัดการสถานศึกษา</span></div>
+            <div class="flex"><span class="w-32 font-bold text-gray-600 text-sm">ชื่อโครงการ:</span> <span class="text-sm font-bold text-blue-800">EduSmart Dashboard (ระบบ AI Dashboard เพื่อบริหารจัดการสถานศึกษาอัจฉริยะ)</span></div>
+            <div class="flex"><span class="w-32 font-bold text-gray-600 text-sm">สถานศึกษา:</span> <span class="text-sm">โรงเรียนหารเทารังสีประชาสรรค์ สพม.พัทลุง</span></div>
         </div>
 
-        <!-- Section 1 -->
-        <section class="content-section">
-            <h2 class="section-title"><span class="section-number">ส่วนที่ 1</span> ข้อมูลทั่วไป</h2>
-            <div class="grid grid-cols-2 gap-8">
-                <div>
-                    <h3 class="font-bold text-sm mb-2 text-gray-700">1.1 ข้อมูลสถานศึกษา</h3>
-                    <ul class="text-sm space-y-1">
-                        <li><b>ชื่อโรงเรียน:</b> หารเทารังสีประชาสรรค์</li>
-                        <li><b>สังกัด:</b> สพม.พัทลุง จังหวัดพัทลุง</li>
-                        <li><b>ระดับชั้น:</b> มัธยมศึกษาปีที่ 1 – 6</li>
-                    </ul>
+        <section class="mb-8">
+            <h2 class="section-title"><span class="section-number">1</span> ข้อมูลทั่วไป</h2>
+            <div class="grid grid-cols-2 gap-10 mb-6">
+                <div class="space-y-2">
+                    <h3 class="font-bold text-blue-900 border-l-4 border-blue-600 pl-2 text-sm">ข้อมูลสถานศึกษา</h3>
+                    <p class="text-sm">โรงเรียนหารเทารังสีประชาสรรค์</p>
+                    <p class="text-sm text-gray-600">สังกัด สพม.พัทลุง จ.พัทลุง</p>
                 </div>
-                <div>
-                    <h3 class="font-bold text-sm mb-2 text-gray-700">1.2 ข้อมูลผู้บริหาร</h3>
-                    <ul class="text-sm space-y-1">
-                        <li><b>ชื่อ-สกุล:</b> .....................................................</li>
-                        <li><b>ตำแหน่ง:</b> ผู้อำนวยการโรงเรียน</li>
-                        <li><b>โทรศัพท์:</b> 000-000-0000</li>
-                    </ul>
+                <div class="space-y-2">
+                    <h3 class="font-bold text-blue-900 border-l-4 border-blue-600 pl-2 text-sm">ข้อมูลผู้บริหาร</h3>
+                    <p class="text-sm">ผู้อำนวยการโรงเรียน: .......................................</p>
+                    <p class="text-sm text-gray-600">โทรศัพท์: 000-000-0000</p>
                 </div>
             </div>
 
-            <div class="mt-6">
-                <h3 class="font-bold text-sm mb-3 text-gray-700">1.3 ข้อมูลทีมผู้พัฒนา (ทีม: Bad GateWay)</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 10%">ที่</th>
-                            <th style="width: 35%">ชื่อ-สกุล</th>
-                            <th style="width: 25%">ตำแหน่ง / ระดับชั้น</th>
-                            <th style="width: 30%">บทบาทในทีม</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td class="text-center">1</td><td>นาย ... .... </td><td class="text-center">ครูที่ปรึกษา</td><td class="text-center">หัวหน้าทีม / ที่ปรึกษา</td></tr>
-                        <tr><td class="text-center">2</td><td>นายสุทธิกมล บัวศรี</td><td class="text-center">มัธยมศึกษาปีที่ 5/1</td><td class="text-center">นักเรียนผู้พัฒนา </td></tr>
-                        <tr><td class="text-center">3</td><td>นายธนกร เจนนัดที</td><td class="text-center">มัธยมศึกษาปีที่ 4/1</td><td class="text-center">นักเรียนผู้พัฒนา </td></tr>
-                        <tr><td class="text-center">4</td><td>นายสิรวิชญ์ คงปราบ</td><td class="text-center">มัธยมศึกษาปีที่ 4/1</td><td class="text-center">นักเรียนผู้พัฒนา </td></tr>
-                    </tbody>
-                </table>
-                <p class="text-[10px] text-right mt-1 text-gray-400 italic">หมายเหตุ: เบอร์โทรศัพท์ติดต่อสมาชิกทุกคนคือ 000-000-0000</p>
-            </div>
+            <h3 class="font-bold text-sm mb-3 text-gray-700">รายชื่อสมาชิกทีมพัฒนา (Team: Bad GateWay)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="w-12">ที่</th>
+                        <th>ชื่อ-นามสกุล</th>
+                        <th>ระดับชั้น / ตำแหน่ง</th>
+                        <th>หน้าที่รับผิดชอบ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="text-center">1</td><td>นายชวัลวิท พิณเขียว</td><td class="text-center">ครูที่ปรึกษา</td><td class="text-center">ที่ปรึกษาเทคนิค / Project Manager</td></tr>
+                    <tr><td class="text-center">2</td><td>นายสุทธิกมล บัวศรี</td><td class="text-center">มัธยมศึกษาปีที่ 5/1</td><td class="text-center">AI Data Engineer / Lead Dev</td></tr>
+                    <tr><td class="text-center">3</td><td>นายธนกร เจนนัดที</td><td class="text-center">มัธยมศึกษาปีที่ 4/1</td><td class="text-center">Frontend / UI Designer</td></tr>
+                    <tr><td class="text-center">4</td><td>นายสิรวิชญ์ คงปราบ</td><td class="text-center">มัธยมศึกษาปีที่ 4/1</td><td class="text-center">Backend / Database Connect</td></tr>
+                </tbody>
+            </table>
+        </section>
 
-            <div class="mt-4">
-                <h3 class="font-bold text-sm mb-2 text-gray-700">1.4 ประเภทนวัตกรรมที่เสนอ</h3>
-                <div class="grid grid-cols-2 gap-x-4">
-                    <div class="checkbox-item"><span class="checked-box">☑</span> Dashboard ผู้บริหาร</div>
-                    <div class="checkbox-item"><span class="checked-box">☑</span> ระบบวิเคราะห์ข้อมูลเพื่อการตัดสินใจ</div>
-                    <div class="checkbox-item"><span class="checked-box">☑</span> ระบบแจ้งเตือนความเสี่ยงผู้เรียน (Early Warning)</div>
-                    <div class="checkbox-item"><span class="unchecked-box">☐</span> ระบบบริหารงานอัตโนมัติ (Automation)</div>
-                </div>
+        <section>
+            <h2 class="section-title"><span class="section-number">2</span> ชื่อนวัตกรรม AI และแนวคิด</h2>
+            <div class="p-5 border-2 border-dashed border-blue-200 rounded-xl bg-blue-50/30">
+                <p class="font-bold text-blue-800 mb-2">EduSmart Dashboard</p>
+                <p class="text-justify italic text-gray-700">
+                    "เปลี่ยนการจัดการข้อมูลจาก 'รายงานกระดาษ' สู่ 'ปัญญาประดิษฐ์วิเคราะห์' เน้นการทำงานแบบ Real-time เพื่อลดเวลาการเข้าถึงข้อมูลจาก 1 ชั่วโมง เหลือเพียง 30 วินาที ช่วยให้ครูมีเวลาคืนสู่ห้องเรียนมากขึ้น"
+                </p>
             </div>
         </section>
 
-        <!-- Section 2 -->
-        <section class="content-section">
-            <h2 class="section-title"><span class="section-number">ส่วนที่ 2</span> ชื่อนวัตกรรมปัญญาประดิษฐ์ (AI)</h2>
-            <div class="space-y-3">
-                <p><b>2.1 ชื่อนวัตกรรม:</b> EduSmart Dashboard – ระบบ AI Dashboard เพื่อบริหารจัดการสถานศึกษาอัจฉริยะ</p>
-                <div class="bg-blue-50 p-4 rounded border-l-4 border-blue-600">
-                    <p class="text-sm font-medium"><b>แนวคิดชื่อนวัตกรรม:</b></p>
-                    <p class="text-sm mt-1">ชื่อโครงการสะท้อนถึงการรวมกันของ "Education" และ "Smart Technology" โดยเน้นการประมวลผลข้อมูลผ่าน AI เพื่อสร้างสารสนเทศที่มองเห็นได้ชัดเจน (Dashboard) ช่วยลดระยะเวลาในการเข้าถึงข้อมูลสำคัญจากเดิม 60 นาที เหลือเพียง 30 วินาที ช่วยให้ผู้บริหารและครูตัดสินใจได้อย่างแม่นยำบนฐานข้อมูลจริง ไม่เพิ่มภาระงานเอกสาร แต่คืนเวลาให้กับการพัฒนาคุณภาพผู้เรียน</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Footer Page Number -->
-        <div class="absolute bottom-10 left-0 right-0 text-center text-gray-400 text-xs italic">
-            - หน้า 1 จาก 3 -
-        </div>
+        <div class="footer-page">- หน้า 1 จาก 3 -</div>
     </div>
 
-    <!-- PAGE 2: Problem & Implementation -->
-    <div class="page shadow-xl">
-        <!-- Section 3 -->
-        <section class="content-section">
-            <h2 class="section-title"><span class="section-number">ส่วนที่ 3</span> การวิเคราะห์สภาพปัญหาและความจำเป็น</h2>
-            <div class="space-y-4">
-                <h3 class="font-bold text-sm text-gray-800">3.1 สภาพระบบบริหารจัดการปัจจุบัน</h3>
-                <p>โรงเรียนหารเทารังสีประชาสรรค์ประสบปัญหาการจัดการข้อมูลที่กระจัดกระจายอยู่ในระบบ SGS และ DMC ซึ่งไม่เชื่อมต่อกัน ครูที่ปรึกษาต้องทำรายงานด้วยมือเฉลี่ย 8 ชั่วโมงต่อสัปดาห์ ทำให้พบปัญหาผู้เรียน (เช่น การขาดเรียนหรือเกรดตกต่ำ) ล่าช้ากว่าที่ควรจะเป็น</p>
-                
-                <h3 class="font-bold text-sm text-gray-800">3.2 เทคนิค AI ที่นำมาใช้</h3>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="p-3 border rounded">
-                        <p class="font-bold text-blue-700 text-sm">Machine Learning</p>
-                        <p class="text-xs mt-1">วิเคราะห์แนวโน้มผลสัมฤทธิ์ทางการเรียนเพื่อคาดการณ์ความเสี่ยงล่วงหน้า 4 สัปดาห์</p>
-                    </div>
-                    <div class="p-3 border rounded">
-                        <p class="font-bold text-blue-700 text-sm">Anomaly Detection</p>
-                        <p class="text-xs mt-1">ตรวจพบพฤติกรรมการขาดเรียนที่ผิดปกติทันทีและแจ้งเตือนไปยังครูที่ปรึกษา</p>
-                    </div>
-                </div>
+    <div class="page">
+        <section class="mb-10">
+            <h2 class="section-title"><span class="section-number">3</span> การวิเคราะห์ปัญหาและความจำเป็น</h2>
+            <div class="bg-red-50 p-5 rounded-lg border-l-4 border-red-400 mb-6">
+                <h4 class="font-bold text-red-800 text-sm mb-1">Pain Point สำคัญ:</h4>
+                <p class="text-sm text-gray-700">ข้อมูลนักเรียนกระจายตัวในหลายแพลตฟอร์ม (SGS, DMC, Checklist กระดาษ) ทำให้ครูที่ปรึกษาต้องใช้เวลากว่า 8 ชม./สัปดาห์ ในการทำเอกสาร และผู้บริหารมองเห็นภาพรวมปัญหาผู้เรียนล่าช้าเกิน 1 เดือน</p>
             </div>
-        </section>
-
-        <!-- Section 4 -->
-        <section class="content-section">
-            <h2 class="section-title"><span class="section-number">ส่วนที่ 4</span> การออกแบบนวัตกรรมและกระบวนการ</h2>
-            <div class="space-y-4">
-                <h3 class="font-bold text-sm text-gray-800">4.1 โครงสร้างระบบ (Architecture)</h3>
-                <div class="flex flex-col gap-2">
-                    <div class="bg-gray-100 p-2 text-center rounded text-xs font-bold">Data Layer (SGS, DMC Connect via Apps Script)</div>
-                    <div class="text-center">↓</div>
-                    <div class="bg-blue-100 p-2 text-center rounded text-xs font-bold">AI Processing Layer (Python, Scikit-learn on Colab)</div>
-                    <div class="text-center">↓</div>
-                    <div class="bg-green-100 p-2 text-center rounded text-xs font-bold">Visualization Layer (Looker Studio Executive Dashboard)</div>
-                </div>
-
-                <h3 class="font-bold text-sm text-gray-800 mt-4">4.2 แผนการดำเนินงาน (6 เดือน)</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 25%">ระยะเวลา</th>
-                            <th style="width: 75%">กิจกรรมหลัก</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td class="text-center">เดือนที่ 1-2</td><td>วิเคราะห์ความต้องการ ออกแบบฐานข้อมูล และเชื่อมต่อระบบ SGS/DMC</td></tr>
-                        <tr><td class="text-center">เดือนที่ 3-4</td><td>พัฒนาโมดูล AI (Early Warning) และออกแบบ Dashboard สำหรับผู้บริหาร</td></tr>
-                        <tr><td class="text-center">เดือนที่ 5</td><td>ทดลองใช้ในกลุ่มนำร่อง (ม.5/1) เก็บข้อมูลความพึงพอใจและประสิทธิภาพ</td></tr>
-                        <tr><td class="text-center">เดือนที่ 6</td><td>สรุปผลโครงการ และเสนอแผนขยายผลสู่ทุกระดับชั้นในภาคเรียนถัดไป</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Section 5 -->
-        <section class="content-section">
-            <h2 class="section-title"><span class="section-number">ส่วนที่ 5</span> ความพร้อมและศักยภาพของสถานศึกษา</h2>
+            
+            <h3 class="font-bold text-sm text-gray-800 mb-3">นวัตกรรม AI ที่นำมาประยุกต์ใช้:</h3>
             <div class="grid grid-cols-2 gap-4">
-                <div class="bg-gray-50 p-3 rounded">
-                    <h4 class="font-bold text-xs mb-2">ความพร้อมด้านบุคลากร</h4>
-                    <p class="text-xs">ทีมพัฒนามีความรู้ด้านวิทยาการคำนวณและ AI โดยมีผู้บริหารสนับสนุนนโยบายดิจิทัลอย่างเต็มที่</p>
+                <div class="p-4 border rounded-xl shadow-sm">
+                    <span class="text-blue-600 font-bold">Predictive Modeling</span>
+                    <p class="text-xs mt-2 text-gray-600">ใช้ AI ทำนายกลุ่มเสี่ยงหลุดออกจากระบบการศึกษาล่วงหน้า โดยประมวลผลจากสถิติการมาเรียนและเกรดเฉลี่ย</p>
                 </div>
-                <div class="bg-gray-50 p-3 rounded">
-                    <h4 class="font-bold text-xs mb-2">ความพร้อมด้านโครงสร้างพื้นฐาน</h4>
-                    <p class="text-xs">โรงเรียนมีเครือข่าย UniNet ครอบคลุม และใช้ Google Workspace for Education เป็นฐานหลัก</p>
+                <div class="p-4 border rounded-xl shadow-sm">
+                    <span class="text-blue-600 font-bold">Automated Insights</span>
+                    <p class="text-xs mt-2 text-gray-600">สรุปผลสารสนเทศระดับโรงเรียนอัตโนมัติ ไม่ต้องคีย์ข้อมูลซ้ำซ้อนผ่าน Google Apps Script</p>
                 </div>
             </div>
         </section>
 
-        <div class="absolute bottom-10 left-0 right-0 text-center text-gray-400 text-xs italic">
-            - หน้า 2 จาก 3 -
-        </div>
+        <section class="mb-10">
+            <h2 class="section-title"><span class="section-number">4</span> การออกแบบและโครงสร้างระบบ</h2>
+            <div class="bg-gray-100 p-6 rounded-xl flex flex-col items-center gap-2 border border-gray-200">
+                <div class="bg-white px-4 py-2 rounded shadow-sm border border-blue-500 font-bold text-xs">Data Source: SGS / DMC API</div>
+                <div class="text-blue-400">▼</div>
+                <div class="bg-blue-600 text-white px-4 py-2 rounded shadow-sm font-bold text-xs">AI Engine: Python & ML Analysis</div>
+                <div class="text-blue-400">▼</div>
+                <div class="bg-green-600 text-white px-4 py-2 rounded shadow-sm font-bold text-xs">Visualization: Looker Studio Dashboard</div>
+            </div>
+            
+            <h3 class="font-bold text-sm text-gray-800 mt-6 mb-3">แผนการดำเนินงาน (Timeline)</h3>
+            <table>
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="w-1/4">ระยะเวลา</th>
+                        <th>กิจกรรมหลัก</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="text-center">เดือน 1-2</td><td>พัฒนาระบบเชื่อมต่อข้อมูล (Data Pipeline)</td></tr>
+                    <tr><td class="text-center">เดือน 3-4</td><td>สร้างโมเดล AI และออกแบบ Dashboard ผู้บริหาร</td></tr>
+                    <tr><td class="text-center">เดือน 5-6</td><td>ทดสอบระบบ (UAT) และขยายผลการใช้งานจริง</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2 class="section-title"><span class="section-number">5</span> ความพร้อมของสถานศึกษา</h2>
+            <div class="grid grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <p class="text-sm"><strong>ด้านบุคลากร:</strong> ทีมพัฒนามีทักษะ Full-stack Dev และผ่านการอบรม Python for AI</p>
+                </div>
+                <div class="space-y-2">
+                    <p class="text-sm"><strong>ด้านทรัพยากร:</strong> โรงเรียนสนับสนุน Server และระบบ Google Workspace แบบ Enterprise</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer-page">- หน้า 2 จาก 3 -</div>
     </div>
 
-    <!-- PAGE 3: Results & Signature -->
-    <div class="page shadow-xl">
-        <!-- Section 6 -->
-        <section class="content-section">
-            <h2 class="section-title"><span class="section-number">ส่วนที่ 6</span> ผลลัพธ์ที่คาดว่าจะเกิดขึ้น</h2>
+    <div class="page">
+        <section class="mb-10">
+            <h2 class="section-title"><span class="section-number">6</span> ผลลัพธ์และผลกระทบ (Impact)</h2>
             <div class="space-y-6">
-                <div>
-                    <h3 class="font-bold text-sm text-gray-800 border-l-2 border-blue-500 pl-2">ด้านการกำหนดนโยบายและกลยุทธ์</h3>
-                    <p class="text-sm mt-1">ผู้บริหารสามารถเข้าถึง KPI สำคัญของโรงเรียนได้ทันที ส่งผลให้การแก้ไขปัญหาผู้เรียนกลุ่มเสี่ยงทำได้เร็วขึ้นร้อยละ 100 และลดความล่าช้าในการรายงานผล</p>
+                <div class="flex gap-4">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex-shrink-0 flex items-center justify-center text-blue-600 font-bold">1</div>
+                    <div>
+                        <p class="font-bold text-gray-800">ประสิทธิภาพการบริหาร</p>
+                        <p class="text-sm text-gray-600 text-justify">ผู้บริหารเห็น KPI สำคัญแบบ Real-time ช่วยลดความผิดพลาดในการตัดสินใจเชิงนโยบายได้ร้อยละ 90</p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="font-bold text-sm text-gray-800 border-l-2 border-blue-500 pl-2">ด้านการบริหารทรัพยากรและบุคลากร</h3>
-                    <p class="text-sm mt-1">ลดภาระงานเอกสารครูได้ไม่น้อยกว่าร้อยละ 80 คืนเวลาให้ครูได้ทำ PLC และพัฒนารูปแบบการสอนที่ทันสมัยสอดคล้องกับความต้องการของผู้เรียนรายบุคคล</p>
+                <div class="flex gap-4">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex-shrink-0 flex items-center justify-center text-green-600 font-bold">2</div>
+                    <div>
+                        <p class="font-bold text-gray-800">คุณภาพชีวิตบุคลากร</p>
+                        <p class="text-sm text-gray-600 text-justify">ครูที่ปรึกษาลดภาระงานเอกสารซ้ำซ้อน มีเวลาทำวิจัยในชั้นเรียน (CAR) และดูแลนักเรียนได้ใกล้ชิดขึ้น</p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="font-bold text-sm text-gray-800 border-l-2 border-blue-500 pl-2">ด้านการพัฒนาระบบและองค์กร</h3>
-                    <p class="text-sm mt-1">เกิดนวัตกรรมต้นแบบ AI School Management ที่โรงเรียนเครือข่ายสามารถนำไปปรับใช้ได้จริง ส่งเสริมภาพลักษณ์โรงเรียนดิจิทัลแห่งอนาคต</p>
+                <div class="flex gap-4">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex-shrink-0 flex items-center justify-center text-purple-600 font-bold">3</div>
+                    <div>
+                        <p class="font-bold text-gray-800">ความยั่งยืนขององค์กร</p>
+                        <p class="text-sm text-gray-600 text-justify">เกิดวัฒนธรรมการใช้ Data-Driven ในการทำงาน สร้างรากฐานสู่การเป็น Smart School อย่างแท้จริง</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 7 -->
-        <section class="content-section">
-            <h2 class="section-title"><span class="section-number">ส่วนที่ 7</span> แนวทางการขยายผลและความยั่งยืน</h2>
-            <p>โรงเรียนจะบรรจุโครงการ <b>EduSmart Dashboard</b> เข้าสู่แผนปฏิบัติการประจำปีเพื่อให้มีงบประมาณสนับสนุนต่อเนื่อง และพัฒนาโมดูลวิเคราะห์งบประมาณและทรัพยากรเพิ่มเติมในปีถัดไป รวมถึงการเผยแพร่โค้ดระบบเป็น Open Source ให้แก่โรงเรียนในเครือข่าย สพม.พัทลุง</p>
+        <section class="mb-10">
+            <h2 class="section-title"><span class="section-number">7</span> แนวทางการขยายผล</h2>
+            <p class="text-sm border-l-4 border-blue-600 pl-4 py-2 bg-blue-50">โครงการมีแผนพัฒนาเป็น Open API ให้กับกลุ่มโรงเรียนเครือข่าย สพม.พัทลุง เพื่อสร้างมาตรฐานการจัดการข้อมูลร่วมกันในปีการศึกษาหน้า</p>
         </section>
 
-        <!-- Final Declaration & Signatures -->
-        <div class="mt-20 border-t pt-8">
-            <div class="bg-gray-50 p-6 rounded-lg">
-                <div class="checkbox-item mb-4">
-                    <span class="checked-box">☑</span> 
-                    <span class="text-sm">ข้าพเจ้าขอรับรองว่าข้อมูลข้างต้นเป็นความจริง และข้อเสนอโครงการนี้เป็นผลงานที่ทีมงานพัฒนาขึ้นด้วยตนเอง ไม่มีการละเมิดทรัพย์สินทางปัญญาของผู้อื่น</span>
+        <div class="mt-auto border-t-2 border-gray-100 pt-8">
+            <div class="bg-gray-50 p-8 rounded-2xl border border-gray-200">
+                <div class="flex items-start gap-3 mb-8">
+                    <span class="text-blue-600 text-xl">☑</span>
+                    <p class="text-xs text-gray-500 italic">ขอรับรองว่าข้อเสนอโครงการนี้เป็นแนวคิดริเริ่มของทีมพัฒนา และมุ่งหวังเพื่อใช้พัฒนาการศึกษาอย่างบริสุทธิ์ใจ</p>
                 </div>
                 
-                <div class="grid grid-cols-2 gap-10 mt-10">
-                    <div class="text-center space-y-2">
-                        <p class="text-sm">ลงชื่อ ................................................................</p>
-                        <p class="font-bold text-sm">(นายชวัลวิท พิณเขียว)</p>
-                        <p class="text-xs text-gray-500 italic">ครูผู้แทนทีม / ครูที่ปรึกษา</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                        <p class="mb-10">ลงชื่อ ................................................................</p>
+                        <p class="font-bold text-sm">(......)</p>
+                        <p class="text-xs text-gray-400">ตำแหน่ง ครูที่ปรึกษาโครงการ</p>
                     </div>
-                    <div class="text-center space-y-2">
-                        <p class="text-sm text-gray-400">วันที่ 4 เดือน เมษายน พ.ศ. 2568</p>
+                    <div class="text-center flex flex-col justify-center">
+                        <p class="text-sm text-gray-500">ยื่นเสนอเมื่อวันที่ 4 เมษายน 2568</p>
                     </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mt-12">
+                <div class="w-24 h-24 border-2 border-dashed border-gray-300 rounded flex items-center justify-center text-[8px] text-gray-300">ประทับตราโรงเรียน</div>
+                <div class="text-right">
+                    <p class="text-[9px] text-gray-400 uppercase tracking-widest">EduSmart Dashboard Framework v2.0</p>
+                    <p class="text-[9px] text-gray-400">Powered by Bad GateWay Team @Haretha</p>
                 </div>
             </div>
         </div>
 
-        <!-- Official Footer Stamp Area -->
-        <div class="mt-16 flex justify-between items-end">
-            <div class="w-32 h-32 border-2 border-dashed border-gray-200 rounded flex items-center justify-center text-[10px] text-gray-300 text-center">
-                ประทับตราโรงเรียน<br>(ถ้ามี)
-            </div>
-            <div class="text-[10px] text-gray-400">
-                เอกสารประกอบการแข่งขัน OBEC HACKATHON 2026<br>
-                สร้างสรรค์โดยทีม haretharangsiprachasan_edusmart
-            </div>
-        </div>
-
-        <div class="absolute bottom-10 left-0 right-0 text-center text-gray-400 text-xs italic">
-            - หน้า 3 จาก 3 -
-        </div>
+        <div class="footer-page">- หน้า 3 จาก 3 -</div>
     </div>
 
 </body>
 </html>
-
