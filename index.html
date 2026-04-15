@@ -1,434 +1,360 @@
-
+```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบฟอร์มข้อเสนอโครงการ OBEC HACKATHON 2026</title>
+    <title>ข้อเสนอโครงการ OBEC HACKATHON 2026 - EduSmart Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* นำเข้าฟอนต์ TH Sarabun New เพื่อให้แสดงผลตรง 100% ทุกเครื่อง */
-        @font-face {
-            font-family: 'TH Sarabun New';
-            src: url('https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/THSarabunNew/THSarabunNew.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'TH Sarabun New';
-            src: url('https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/THSarabunNew/THSarabunNew%20Bold.woff2') format('woff2');
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        :root {
-            --font-main: 'TH Sarabun New', sans-serif;
-            --page-width: 210mm; /* A4 */
-            --page-min-height: 297mm; /* A4 */
-            
-            /* ระยะขอบมาตรฐานเอกสารไทย (กั้นหน้า 3cm, หลัง 2cm, บน 3cm, ล่าง 2cm) */
-            --pad-top: 30mm;
-            --pad-left: 30mm;
-            --pad-right: 20mm;
-            --pad-bottom: 20mm;
-            
-            /* ระยะ Tab หรือย่อหน้ามาตรฐาน */
-            --tab-size: 2.5cm;
-        }
-
         body {
-            background-color: #d1d5db;
-            margin: 0;
-            padding: 20px;
-            font-family: var(--font-main);
-            /* ขนาด 16pt คือขนาดมาตรฐานเอกสารไทย */
-            font-size: 16pt;
-            line-height: 1.25;
-            color: #000;
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+            font-size: 16px; /* Base size, will be scaled slightly up for reading */
         }
-
-        /* กล่องเอกสารจำลอง A4 */
-        .page {
-            background-color: white;
-            width: var(--page-width);
-            min-height: var(--page-min-height);
-            margin: 0 auto;
-            padding: var(--pad-top) var(--pad-right) var(--pad-bottom) var(--pad-left);
-            box-sizing: border-box;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            text-align: justify; /* จัดกระจายแบบไทย */
-        }
-
-        /* การจัดการข้อความทั่วไป */
-        p {
-            margin: 0;
-            padding: 0;
-        }
-
-        .bold { font-weight: bold; }
-        .center { text-align: center; }
-        
-        /* ระยะห่างของบรรทัดและย่อหน้า */
-        .mt-1 { margin-top: 0.5em; }
-        .mt-2 { margin-top: 1em; }
-        .mt-3 { margin-top: 1.5em; }
-        .mb-1 { margin-bottom: 0.5em; }
-
-        /* การย่อหน้า (Indentation) */
-        .indent { text-indent: var(--tab-size); }
-        .pl-1 { padding-left: var(--tab-size); }
-        .pl-2 { padding-left: calc(var(--tab-size) * 2); }
-        
-        /* รายการและ Checkbox */
-        ul.checklist {
-            list-style: none;
-            padding-left: var(--tab-size);
-            margin: 0.5em 0;
-        }
-        ul.checklist li {
-            position: relative;
-            margin-bottom: 0;
-        }
-
-        /* ส่วนสำหรับลายเซ็น */
-        .signature-section {
-            width: 8cm;
-            margin-left: auto; /* ชิดขวา */
-            margin-top: 2cm;
-            text-align: center;
-        }
-
-        /* ปุ่ม Print */
-        .print-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #2563eb;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-family: var(--font-main);
-            font-size: 16pt;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: 0.3s;
-            z-index: 1000;
-        }
-        .print-btn:hover { background-color: #1d4ed8; }
-
-        /* การตั้งค่าตอนสั่งพิมพ์ (Print Media) */
         @media print {
             body {
                 background-color: white;
-                margin: 0;
-                padding: 0;
+                font-size: 14pt;
             }
-            .page {
-                box-shadow: none;
-                margin: 0;
-                width: 100%;
-                padding: 0;
+            .no-print {
+                display: none;
             }
-            @page {
-                size: A4;
-                margin-top: var(--pad-top);
-                margin-left: var(--pad-left);
-                margin-right: var(--pad-right);
-                margin-bottom: var(--pad-bottom);
+            .paper-container {
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                max-width: 100% !important;
             }
-            .print-btn { display: none; }
-            .page-break { page-break-before: always; }
-            .avoid-break { page-break-inside: avoid; }
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+            .page-break-before {
+                page-break-before: always;
+            }
+        }
+        .paper-container {
+            font-size: 1.125rem; /* 18px equivalent for better web reading */
+            line-height: 1.6;
+        }
+        .section-title {
+            color: #1e3a8a; /* Tailwind blue-900 */
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .subsection-title {
+            font-weight: 600;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #374151;
         }
     </style>
 </head>
-<body>
+<body class="antialiased py-8 px-4 sm:px-6 lg:px-8">
 
-    <button class="print-btn" onclick="window.print()">🖨️ พิมพ์เป็น PDF</button>
+    <!-- Action Bar -->
+    <div class="max-w-4xl mx-auto mb-6 flex justify-end no-print">
+        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded shadow flex items-center transition duration-150">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+            พิมพ์ / บันทึกเป็น PDF
+        </button>
+    </div>
 
-    <div class="page">
-        <!-- หน้าปก / หัวเอกสาร -->
-        <div class="center bold">
-            <p>แบบฟอร์มข้อเสนอโครงการ</p>
-            <p>เพื่อเข้าร่วมการแข่งขัน OBEC HACKATHON 2026 : FUTURE SCHOOL INNOVATION</p>
-            <p>ปลุกพลังนวัตกรรม เปลี่ยนห้องเรียนสู่โรงเรียนแห่งอนาคต</p>
-            <p>ประเภท นวัตกรรมปัญญาประดิษฐ์ (AI) ด้านบริหารจัดการสถานศึกษา</p>
-        </div>
-
-        <p class="bold mt-2">คำชี้แจง</p>
-        <p class="pl-1">1. แบบฟอร์มนี้ใช้สำหรับเสนอผลงานเข้าร่วมการแข่งขันพัฒนานวัตกรรมปัญญาประดิษฐ์ (AI) ด้านบริหารจัดการสถานศึกษา โดยจัดทำเป็นเอกสารความยาวไม่เกิน 20 หน้ากระดาษขนาด A4</p>
-        <p class="pl-1">2. เนื้อหาข้อเสนอโครงการต้องแสดงให้เห็นถึงการวิเคราะห์ปัญหาการออกแบบนวัตกรรม กระบวนการดำเนินงาน และผลลัพธ์ที่คาดว่าจะเกิดขึ้นอย่างชัดเจน</p>
-        <p class="pl-1">3. ผลงานที่เสนอจะต้องเป็นผลงานที่พัฒนาขึ้นโดยทีมผู้สมัครและต้องไม่ละเมิดทรัพย์สินทางปัญญาของผู้อื่น</p>
-        <p class="pl-1">4. คณะกรรมการจะพิจารณาให้คะแนนตามเกณฑ์ที่กำหนดรวม 100 คะแนน และผลการตัดสินถือเป็นที่สิ้นสุด</p>
-
-        <p class="bold mt-2 mb-1">ชื่อโครงการ : EduSmart Dashboard (ระบบ AI Dashboard เพื่อบริหารจัดการสถานศึกษาอัจฉริยะ)</p>
-
-        <!-- ส่วนที่ 1 -->
-        <p class="bold mt-2">ส่วนที่ 1 ข้อมูลทั่วไป (1 คะแนน)</p>
+    <!-- Paper Container -->
+    <div class="paper-container bg-white max-w-4xl mx-auto shadow-xl rounded-sm p-8 sm:p-12 md:p-16">
         
-        <p class="bold pl-1">1.1 ข้อมูลสถานศึกษา</p>
-        <div class="pl-2">
-            <p><span class="bold">ชื่อโรงเรียน :</span> โรงเรียนหารเทารังสีประชาสรรค์</p>
-            <p><span class="bold">สำนักงานเขตพื้นที่การศึกษา/สำนักบริหารงานการศึกษาพิเศษ :</span> สำนักงานเขตพื้นที่การศึกษามัธยมศึกษาพัทลุง</p>
-            <p><span class="bold">ระดับชั้นที่เปิดสอน :</span> ระดับชั้นมัธยมศึกษาปีที่ 1 - 6</p>
-            <p><span class="bold">ที่อยู่ :</span> 468 หมู่ 2 ต.หารเทา อ.ปากพะยูน จ.พัทลุง 93120</p>
-            <p><span class="bold">โทรศัพท์ :</span> 074-676064</p>
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold mb-2">แบบฟอร์มข้อเสนอโครงการ</h1>
+            <p class="text-xl">เพื่อเข้าร่วมการแข่งขัน OBEC HACKATHON 2026 : FUTURE SCHOOL INNOVATION</p>
+            <p class="text-xl text-blue-800 font-semibold mt-1">ปลุกพลังนวัตกรรม เปลี่ยนห้องเรียนสู่โรงเรียนแห่งอนาคต</p>
+            <p class="text-xl font-bold mt-4 bg-blue-50 inline-block px-4 py-2 rounded-lg border border-blue-100">ประเภท นวัตกรรมปัญญาประดิษฐ์ (AI) ด้านบริหารจัดการสถานศึกษา</p>
         </div>
 
-        <p class="bold pl-1 mt-1">1.2 ข้อมูลผู้บริหารสถานศึกษา</p>
-        <div class="pl-2">
-            <p><span class="bold">ชื่อ-สกุล :</span> นายอนุกูล ชุมทอง</p>
-            <p><span class="bold">ตำแหน่ง :</span> ผู้อำนวยการสถานศึกษา</p>
-            <p><span class="bold">โทรศัพท์ :</span> 083-812-8688</p>
+        <!-- Instructions -->
+        <div class="bg-gray-50 border border-gray-200 rounded-md p-6 mb-8 text-sm sm:text-base">
+            <h2 class="font-bold text-lg mb-2">คำชี้แจง</h2>
+            <ol class="list-decimal list-outside ml-5 space-y-1 text-gray-700">
+                <li>แบบฟอร์มนี้ใช้สำหรับเสนอผลงานเข้าร่วมการแข่งขันพัฒนานวัตกรรมปัญญาประดิษฐ์ (AI) ด้านบริหารจัดการสถานศึกษา โดยจัดทำเป็นเอกสารความยาวไม่เกิน 20 หน้ากระดาษขนาด A4</li>
+                <li>เนื้อหาข้อเสนอโครงการต้องแสดงให้เห็นถึงการวิเคราะห์ปัญหาการออกแบบนวัตกรรม กระบวนการดำเนินงาน และผลลัพธ์ที่คาดว่าจะเกิดขึ้นอย่างชัดเจน</li>
+                <li>ผลงานที่เสนอจะต้องเป็นผลงานที่พัฒนาขึ้นโดยทีมผู้สมัครและต้องไม่ละเมิดทรัพย์สินทางปัญญาของผู้อื่น</li>
+                <li>คณะกรรมการจะพิจารณาให้คะแนนตามเกณฑ์ที่กำหนดรวม 100 คะแนน และผลการตัดสินถือเป็นที่สิ้นสุด</li>
+            </ol>
         </div>
 
-        <p class="bold pl-1 mt-1">1.3 ข้อมูลทีมผู้พัฒนา</p>
-        <div class="pl-2">
-            <p><span class="bold">ชื่อทีม :</span> harnthaorangsiprachasan_badgateway</p>
-            <p>อธิบาย : (ให้ตั้งชื่อทีมเป็นภาษาอังกฤษในรูปแบบ ชื่อสถานศึกษา_ชื่อทีม โดยใช้ตัวอักษรพิมพ์เล็กทั้งหมดไม่ต้องเว้นวรรค และใช้เครื่องหมายขีดล่าง (_) คั่นระหว่างชื่อสถานศึกษากับชื่อทีม ตัวอย่างการตั้งชื่อ : ratchapanyawittayalai_aiclass)</p>
+        <div class="mb-8">
+            <p class="text-xl"><strong>ชื่อโครงการ :</strong> <span class="text-blue-700 font-semibold">EduSmart Dashboard (ระบบ AI Dashboard เพื่อบริหารจัดการสถานศึกษาอัจฉริยะ)</span></p>
+        </div>
 
-            <p class="bold mt-1">1. ครู ลำดับที่ 1</p>
-            <div class="pl-1">
-                <p><span class="bold">ชื่อ-สกุล :</span> นายชวัลวิทย์ พิณเขียว</p>
-                <p><span class="bold">ตำแหน่ง :</span> ครูผู้ควบคุมทีม</p>
-                <p><span class="bold">โทรศัพท์ :</span> 0901800550</p>
-                <p><span class="bold">อีเมล :</span> chavanwit_39@hotmail.com</p>
-                <p><span class="bold">LINE ID :</span> 0901800550</p>
+        <!-- Section 1 -->
+        <h2 class="text-2xl font-bold section-title">ส่วนที่ 1 ข้อมูลทั่วไป (1 คะแนน)</h2>
+        
+        <h3 class="subsection-title">1.1 ข้อมูลสถานศึกษา</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-2 mb-4">
+            <div class="font-semibold text-gray-600">ชื่อโรงเรียน :</div><div class="md:col-span-3">โรงเรียนหารเทารังสีประชาสรรค์</div>
+            <div class="font-semibold text-gray-600">สังกัด :</div><div class="md:col-span-3">สำนักงานเขตพื้นที่การศึกษามัธยมศึกษาพัทลุง</div>
+            <div class="font-semibold text-gray-600">ระดับชั้นที่เปิดสอน :</div><div class="md:col-span-3">ระดับชั้นมัธยมศึกษาปีที่ 1 - 6</div>
+            <div class="font-semibold text-gray-600">ที่อยู่ :</div><div class="md:col-span-3">468 หมู่ 2 ต.หารเทา อ.ปากพะยูน จ.พัทลุง 93120</div>
+            <div class="font-semibold text-gray-600">โทรศัพท์ :</div><div class="md:col-span-3">074-676064</div>
+        </div>
+
+        <h3 class="subsection-title">1.2 ข้อมูลผู้บริหารสถานศึกษา</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-2 mb-4">
+            <div class="font-semibold text-gray-600">ชื่อ-สกุล :</div><div class="md:col-span-3">นาย อนุกูล ชุมทอง</div>
+            <div class="font-semibold text-gray-600">ตำแหน่ง :</div><div class="md:col-span-3">ผู้อำนวยการสถานศึกษา</div>
+            <div class="font-semibold text-gray-600">โทรศัพท์ :</div><div class="md:col-span-3">083-812-8688</div>
+        </div>
+
+        <h3 class="subsection-title">1.3 ข้อมูลทีมผู้พัฒนา</h3>
+        <p class="mb-4"><strong>ชื่อทีม :</strong> <span class="bg-gray-100 px-2 py-1 rounded font-mono text-sm">harnthaorangsiprachasan_badgateway</span></p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="border border-gray-200 p-4 rounded bg-white shadow-sm">
+                <h4 class="font-bold border-b pb-2 mb-2">ครู ลำดับที่ 1</h4>
+                <p><strong>ชื่อ-สกุล :</strong> นายชวัลวิทย์ พิณเขียว</p>
+                <p><strong>ตำแหน่ง :</strong> ครูผู้ควบคุมทีม</p>
+                <p><strong>โทรศัพท์ :</strong> 090-180-0550</p>
+                <p><strong>อีเมล :</strong> chavanwit_39@hotmail.com</p>
+                <p><strong>LINE ID :</strong> 0901800550</p>
             </div>
-
-            <p class="bold mt-1">2. ครู ลำดับที่ 2</p>
-            <div class="pl-1">
-                <p><span class="bold">ชื่อ-สกุล :</span> ........................................................................</p>
-                <p><span class="bold">ตำแหน่ง :</span> ........................................................................</p>
-                <p><span class="bold">โทรศัพท์ :</span> ........................................................................</p>
-                <p><span class="bold">อีเมล :</span> ........................................................................</p>
-                <p><span class="bold">LINE ID :</span> ........................................................................</p>
+            <div class="border border-gray-200 p-4 rounded bg-gray-50 border-dashed text-gray-400">
+                <h4 class="font-bold border-b border-gray-200 pb-2 mb-2">ครู ลำดับที่ 2</h4>
+                <p>ชื่อ-สกุล : ...........................................................</p>
+                <p>ตำแหน่ง : ...........................................................</p>
+                <p>โทรศัพท์ : ...........................................................</p>
+                <p>อีเมล : ...........................................................</p>
+                <p>LINE ID : ...........................................................</p>
             </div>
-
-            <p class="bold mt-1">3. นักเรียน ลำดับที่ 1</p>
-            <div class="pl-1">
-                <p><span class="bold">ชื่อ-สกุล :</span> นายสุทธิกมล บัวศรี</p>
-                <p><span class="bold">ระดับชั้นการศึกษา :</span> ชั้นมัธยมศึกษาปีที่ 5/1</p>
-                <p><span class="bold">โทรศัพท์ :</span> 084-191-2035</p>
-                <p><span class="bold">อีเมล :</span> buaseesuttikamon@gmail.com</p>
-                <p><span class="bold">LINE ID :</span> tiidasuttikamon</p>
+            <div class="border border-gray-200 p-4 rounded bg-white shadow-sm">
+                <h4 class="font-bold border-b pb-2 mb-2">นักเรียน ลำดับที่ 1</h4>
+                <p><strong>ชื่อ-สกุล :</strong> นายสุทธิกมล บัวศรี</p>
+                <p><strong>ระดับชั้น :</strong> มัธยมศึกษาปีที่ 5/1</p>
+                <p><strong>โทรศัพท์ :</strong> 084-191-2035</p>
+                <p><strong>อีเมล :</strong> buaseesuttikamon@gmail.com</p>
+                <p><strong>LINE ID :</strong> tiidasuttikamon</p>
             </div>
-
-            <p class="bold mt-1 avoid-break">4. นักเรียน ลำดับที่ 2</p>
-            <div class="pl-1 avoid-break">
-                <p><span class="bold">ชื่อ-สกุล :</span> นายธนกร เจนนัดที</p>
-                <p><span class="bold">ระดับชั้นการศึกษา :</span> ชั้นมัธยมศึกษาปีที่ 4/1</p>
-                <p><span class="bold">โทรศัพท์ :</span> 062-097-2773</p>
-                <p><span class="bold">อีเมล :</span> tanakron_2@gmail.com</p>
-                <p><span class="bold">LINE ID :</span> 0620972773</p>
+            <div class="border border-gray-200 p-4 rounded bg-white shadow-sm">
+                <h4 class="font-bold border-b pb-2 mb-2">นักเรียน ลำดับที่ 2</h4>
+                <p><strong>ชื่อ-สกุล :</strong> นายธนกร เจนนัดที</p>
+                <p><strong>ระดับชั้น :</strong> มัธยมศึกษาปีที่ 4/1</p>
+                <p><strong>โทรศัพท์ :</strong> 062-097-2773</p>
+                <p><strong>อีเมล :</strong> tanakron_2@gmail.com</p>
+                <p><strong>LINE ID :</strong> 0620972773</p>
             </div>
-
-            <p class="bold mt-1 avoid-break">5. นักเรียน ลำดับที่ 3</p>
-            <div class="pl-1 avoid-break">
-                <p><span class="bold">ชื่อ-สกุล :</span> นายสิรวิชญ์ คงปราบ</p>
-                <p><span class="bold">ระดับชั้นการศึกษา :</span> ชั้นมัธยมศึกษาปีที่ 4/1</p>
-                <p><span class="bold">โทรศัพท์ :</span> 0610356861</p>
-                <p><span class="bold">อีเมล :</span> sirawitkongprap@gmail.com</p>
-                <p><span class="bold">LINE ID :</span> 0610356861</p>
-            </div>
-
-            <p class="bold mt-1 avoid-break">6. สมาชิกทีมที่มีความรู้ด้านเทคโนโลยีคอมพิวเตอร์ และสามารถพัฒนานวัตกรรมปัญญาประดิษฐ์ (AI) (ระบุอย่างน้อย 1 คน)</p>
-            <div class="pl-1 avoid-break">
-                <p><span class="bold">ชื่อ-สกุล :</span> 1) นายธนกร เจนนัดที 2) นายสุทธิกมล บัวศรี</p>
+            <div class="border border-gray-200 p-4 rounded bg-white shadow-sm">
+                <h4 class="font-bold border-b pb-2 mb-2">นักเรียน ลำดับที่ 3</h4>
+                <p><strong>ชื่อ-สกุล :</strong> นายสิรวิชญ์ คงปราบ</p>
+                <p><strong>ระดับชั้น :</strong> มัธยมศึกษาปีที่ 4/1</p>
+                <p><strong>โทรศัพท์ :</strong> 061-035-6861</p>
+                <p><strong>อีเมล :</strong> sirawitkongprap@gmail.com</p>
+                <p><strong>LINE ID :</strong> 0610356861</p>
             </div>
         </div>
 
-        <p class="bold pl-1 mt-2">1.4 ประเภทนวัตกรรมที่เสนอ (เลือกได้มากกว่า 1 ข้อ)</p>
-        <ul class="checklist">
-            <li>☐ ระบบวิเคราะห์ข้อมูลเพื่อการตัดสินใจ</li>
-            <li>☐ ระบบแจ้งเตือนความเสี่ยงผู้เรียน (Early Warning)</li>
-            <li>☐ ระบบบริหารงานอัตโนมัติ (Automation)</li>
-            <li>☑ Dashboard ผู้บริหาร</li>
-            <li>☐ ระบบวิเคราะห์งบประมาณ/ทรัพยากร</li>
-            <li>☐ อื่น ๆ (ระบุ) ........................................................................</li>
+        <div class="bg-blue-50 border border-blue-100 p-4 rounded mb-6">
+            <h4 class="font-bold mb-2">สมาชิกทีมที่มีความรู้ด้านเทคโนโลยีคอมพิวเตอร์ และสามารถพัฒนานวัตกรรม (AI)</h4>
+            <p>1) นายธนกร เจนนัดที &nbsp;&nbsp; 2) นายสุทธิกมล บัวศรี</p>
+        </div>
+
+        <h3 class="subsection-title">1.4 ประเภทนวัตกรรมที่เสนอ</h3>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+            <li class="flex items-center"><input type="checkbox" checked disabled class="mr-2 w-4 h-4 text-blue-600 rounded"> ระบบวิเคราะห์ข้อมูลเพื่อการตัดสินใจ</li>
+            <li class="flex items-center"><input type="checkbox" checked disabled class="mr-2 w-4 h-4 text-blue-600 rounded"> ระบบแจ้งเตือนความเสี่ยงผู้เรียน (Early Warning)</li>
+            <li class="flex items-center"><input type="checkbox" checked disabled class="mr-2 w-4 h-4 text-blue-600 rounded"> ระบบบริหารงานอัตโนมัติ (Automation)</li>
+            <li class="flex items-center"><input type="checkbox" checked disabled class="mr-2 w-4 h-4 text-blue-600 rounded"> Dashboard ผู้บริหาร</li>
+            <li class="flex items-center"><input type="checkbox" checked disabled class="mr-2 w-4 h-4 text-blue-600 rounded"> ระบบวิเคราะห์งบประมาณ/ทรัพยากร</li>
+            <li class="flex items-center"><input type="checkbox" disabled class="mr-2 w-4 h-4 rounded"> อื่น ๆ (ระบุ) ........................................</li>
         </ul>
 
-        <!-- ส่วนที่ 2 -->
-        <p class="bold mt-2 page-break">ส่วนที่ 2 ชื่อนวัตกรรมปัญญาประดิษฐ์ (AI) (3 คะแนน)</p>
+
+        <!-- Section 2 -->
+        <div class="page-break-before"></div>
+        <h2 class="text-2xl font-bold section-title">ส่วนที่ 2 ชื่อนวัตกรรมปัญญาประดิษฐ์ (AI) (3 คะแนน)</h2>
         
-        <p class="bold pl-1">2.1 ชื่อนวัตกรรม : EduSmart Dashboard (ระบบ AI Dashboard เพื่อบริหารจัดการสถานศึกษาอัจฉริยะ)</p>
-        <p class="pl-2">(ควรเป็นชื่อที่จดจำง่ายสื่อสารแนวคิดหลักของนวัตกรรมปัญญาประดิษฐ์ (AI) และเพิ่มประสิทธิภาพการบริหารจัดการสถานศึกษาอย่างชัดเจน)</p>
+        <p class="mb-4"><strong>2.1 ชื่อนวัตกรรม:</strong> <span class="text-blue-700 font-semibold">EduSmart Dashboard (ระบบ AI Dashboard เพื่อบริหารจัดการสถานศึกษาอัจฉริยะ)</span></p>
 
-        <p class="bold pl-1 mt-1">2.2 ที่มาและแนวคิดของชื่อนวัตกรรม</p>
+        <h3 class="subsection-title">2.2 ที่มาและแนวคิดของชื่อนวัตกรรม</h3>
+        <ul class="list-none space-y-3">
+            <li><strong>2.2.1 ความหมายของชื่อผลงาน:</strong><br>
+                1) คำสำคัญในชื่อหมายถึงการทำงานร่วมกันระหว่างเทคโนโลยีด้านการศึกษา (Edu) ระบบอัจฉริยะ (Smart) และการแสดงผลข้อมูล (Dashboard)<br>
+                2) สะท้อนแนวคิดในการเปลี่ยนรูปแบบการจัดการข้อมูลจาก "รายงานกระดาษ" ไปสู่การใช้ "ปัญญาประดิษฐ์วิเคราะห์"
+            </li>
+            <li><strong>2.2.2 ความเชื่อมโยงกับเป้าหมายของโครงการ:</strong><br>
+                ชื่อผลงานสอดคล้องกับวัตถุประสงค์ที่ต้องการลดเวลาการเข้าถึงข้อมูลจาก 1 ชั่วโมงให้เหลือเพียง 30 วินาที สนับสนุนการยกระดับสถานศึกษาด้วยการเน้นการทำงานแบบ Real-time เพื่อช่วยให้ครูมีเวลาคืนสู่ห้องเรียนได้มากขึ้น
+            </li>
+            <li><strong>2.2.3 แนวคิดหลักในการส่งเสริมและสนับสนุนการบริหารจัดการสถานศึกษา:</strong><br>
+                ใช้นวัตกรรม AI (Predictive Modeling) เพื่อทำนายกลุ่มเสี่ยงที่อาจหลุดออกจากระบบการศึกษาล่วงหน้า บูรณาการโดยการประมวลผลข้อมูลจากสถิติการมาเรียนและเกรดเฉลี่ยของผู้เรียน
+            </li>
+            <li><strong>2.2.4 ความคิดริเริ่มสร้างสรรค์และความแตกต่างจากแนวทางเดิม:</strong><br>
+                1) จุดเด่นคือนวัตกรรม Automated Insights ที่สามารถสรุปผลสารสนเทศระดับโรงเรียนได้อัตโนมัติ แตกต่างจากเดิมที่ครูไม่ต้องคีย์ข้อมูลซ้ำซ้อนผ่าน Google Apps Script<br>
+                2) สร้างคุณค่าให้ระบบบริหารโดยช่วยให้ผู้บริหารเห็น KPI สำคัญแบบ Real-time และลดความผิดพลาดในการตัดสินใจเชิงนโยบายได้ถึงร้อยละ 90
+            </li>
+        </ul>
+
+        <!-- Section 3 -->
+        <h2 class="text-2xl font-bold section-title">ส่วนที่ 3 การวิเคราะห์สภาพปัญหาและความจำเป็น (21 คะแนน)</h2>
         
-        <p class="bold pl-2">2.2.1 ความหมายของชื่อผลงาน</p>
-        <p class="indent pl-2">1) คำสำคัญในชื่อหมายถึงการทำงานร่วมกันระหว่างเทคโนโลยีด้านการศึกษา (Edu) ระบบอัจฉริยะ (Smart) และการแสดงผลข้อมูล (Dashboard)</p>
-        <p class="indent pl-2">2) สะท้อนแนวคิดในการเปลี่ยนรูปแบบการจัดการข้อมูลจาก "รายงานกระดาษ" ไปสู่การใช้ "ปัญญาประดิษฐ์วิเคราะห์"</p>
+        <h3 class="subsection-title">3.1 การวิเคราะห์สภาพระบบบริหารจัดการสถานศึกษา (6 คะแนน)</h3>
+        <p>ปัจจุบันข้อมูลของนักเรียนกระจายตัวอยู่ในหลายแพลตฟอร์ม เช่น ระบบ SGS, ระบบ DMC รวมถึง Checklist ที่เป็นกระดาษ ปัญหาที่เกิดขึ้นจากการใช้งานจริงคือกระบวนการเหล่านี้ทำให้ครูที่ปรึกษาต้องสูญเสียเวลาไปกว่า 8 ชั่วโมงต่อสัปดาห์ในการทำเอกสาร ข้อจำกัดที่สำคัญอีกประการคือผู้บริหารไม่สามารถรับทราบข้อมูลได้อย่างทันท่วงที ทำให้มองเห็นภาพรวมปัญหาของผู้เรียนล่าช้าไปเกิน 1 เดือน</p>
 
-        <p class="bold pl-2 mt-1">2.2.2 ความเชื่อมโยงกับเป้าหมายของโครงการ</p>
-        <p class="indent pl-2">ชื่อผลงานสอดคล้องกับวัตถุประสงค์ที่ต้องการลดเวลาการเข้าถึงข้อมูลจาก 1 ชั่วโมงให้เหลือเพียง 30 วินาที สนับสนุนการยกระดับสถานศึกษาด้วยการเน้นการทำงานแบบ Real-time เพื่อช่วยให้ครูมีเวลาคืนสู่ห้องเรียนได้มากขึ้น</p>
+        <h3 class="subsection-title">3.2 ความชัดเจนของปัญหาและเหตุผลในการเลือกใช้นวัตกรรมปัญญาประดิษฐ์ (AI) (6 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>3.2.1</strong> ปัญหาการจัดการข้อมูลที่กระจายตัวในหลายแพลตฟอร์มและเอกสารกระดาษ ส่งผลให้เกิดความซ้ำซ้อนและครูต้องใช้เวลากว่า 8 ชั่วโมงต่อสัปดาห์ในการจัดการเอกสาร</li>
+            <li><strong>3.2.2</strong> โครงการได้นำเทคนิค Predictive Modeling มาทำนายกลุ่มเสี่ยงล่วงหน้า ทำงานควบคู่กับการประมวลผลข้อมูลสถิติการมาเรียนและเกรดเฉลี่ย มีการใช้งาน Automated Insights เพื่อช่วยสรุปผลสารสนเทศอัตโนมัติ</li>
+            <li><strong>3.2.3</strong> นวัตกรรม AI สามารถสร้างข้อมูล KPI ที่สำคัญให้แก่ผู้บริหารได้แบบ Real-time ข้อมูลเชิงลึกนี้สนับสนุนการตัดสินใจเชิงนโยบาย โดยสามารถลดความผิดพลาดในการตัดสินใจได้ร้อยละ 90</li>
+        </ul>
 
-        <p class="bold pl-2 mt-1">2.2.3 แนวคิดหลักในการส่งเสริมและสนับสนุนการบริหารจัดการสถานศึกษา</p>
-        <p class="indent pl-2">ใช้นวัตกรรม AI (Predictive Modeling) เพื่อทำนายกลุ่มเสี่ยงที่อาจหลุดออกจากระบบการศึกษาล่วงหน้า บูรณาการโดยการประมวลผลข้อมูลจากสถิติการมาเรียนและเกรดเฉลี่ยของผู้เรียน</p>
+        <h3 class="subsection-title">3.3 เหตุผลและความจำเป็นในการเลือกใช้นวัตกรรมปัญญาประดิษฐ์ (AI) (9 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li>เพื่อลดระยะเวลาการเข้าถึงข้อมูลของผู้บริหารและครู โดยลดเวลาการสืบค้นข้อมูลจากเดิม 1 ชั่วโมง เหลือเพียง 30 วินาที</li>
+            <li>เพื่อลดภาระงานเอกสารที่ซ้ำซ้อนของครูที่ปรึกษา ซึ่งแต่เดิมต้องใช้เวลาทำเอกสารถึง 8 ชั่วโมงต่อสัปดาห์</li>
+            <li>เพื่อเพิ่มประสิทธิภาพการตัดสินใจเชิงนโยบายของผู้บริหาร โดยมีเป้าหมายในการลดความผิดพลาดในการตัดสินใจได้ร้อยละ 90 ด้วยการดู KPI แบบ Real-time</li>
+            <li>เพื่อแก้ไขปัญหาความล่าช้าในการติดตามผู้เรียน โดยใช้ AI ทำนายกลุ่มเสี่ยงล่วงหน้าแทนระบบเดิมที่ผู้บริหารเห็นปัญหาล่าช้าเกิน 1 เดือน</li>
+        </ul>
 
-        <p class="bold pl-2 mt-1">2.2.4 ความคิดริเริ่มสร้างสรรค์และความแตกต่างจากแนวทางเดิม</p>
-        <p class="indent pl-2">จุดเด่นคือนวัตกรรม Automated Insights ที่สามารถสรุปผลสารสนเทศระดับโรงเรียนได้อัตโนมัติ แตกต่างจากเดิมที่ครูไม่ต้องคีย์ข้อมูลซ้ำซ้อนผ่าน Google Apps Script 3) สร้างคุณค่าให้ระบบบริหารโดยช่วยให้ผู้บริหารเห็น KPI สำคัญแบบ Real-time และลดความผิดพลาดในการตัดสินใจเชิงนโยบายได้ถึงร้อยละ 90</p>
 
-        <!-- ส่วนที่ 3 -->
-        <p class="bold mt-2">ส่วนที่ 3 การวิเคราะห์สภาพปัญหาและความจำเป็นในการใช้นวัตกรรมปัญญาประดิษฐ์ (AI) ตามบริบทสถานศึกษา (21 คะแนน)</p>
-        
-        <p class="bold pl-1">3.1 การวิเคราะห์สภาพระบบบริหารจัดการสถานศึกษา (6 คะแนน)</p>
-        <p class="indent pl-1">ปัจจุบันข้อมูลของนักเรียนกระจายตัวอยู่ในหลายแพลตฟอร์ม เช่น ระบบ SGS, ระบบ DMC รวมถึง Checklist ที่เป็นกระดาษ ปัญหาที่เกิดขึ้นจากการใช้งานจริงคือกระบวนการเหล่านี้ทำให้ครูที่ปรึกษาต้องสูญเสียเวลาไปกว่า 8 ชั่วโมงต่อสัปดาห์ในการทำเอกสาร ข้อจำกัดที่สำคัญอีกประการคือผู้บริหารไม่สามารถรับทราบข้อมูลได้อย่างทันท่วงที ทำให้มองเห็นภาพรวมปัญหาของผู้เรียนล่าช้าไปเกิน 1 เดือน</p>
+        <!-- Section 4 -->
+        <h2 class="text-2xl font-bold section-title">ส่วนที่ 4 การออกแบบนวัตกรรมและกระบวนการดำเนินงาน (30 คะแนน)</h2>
 
-        <p class="bold pl-1 mt-1">3.2 ความชัดเจนของปัญหาและเหตุผลในการเลือกใช้นวัตกรรมปัญญาประดิษฐ์ (AI) (6 คะแนน)</p>
-        <div class="pl-2">
-            <p>3.2.1 ปัญหาการจัดการข้อมูลที่กระจายตัวในหลายแพลตฟอร์มและเอกสารกระดาษ ส่งผลให้เกิดความซ้ำซ้อนและครูต้องใช้เวลากว่า 8 ชั่วโมงต่อสัปดาห์ในการจัดการเอกสาร</p>
-            <p>3.2.2 โครงการได้นำเทคนิค Predictive Modeling มาทำนายกลุ่มเสี่ยงล่วงหน้า ทำงานควบคู่กับการประมวลผลข้อมูลสถิติการมาเรียนและเกรดเฉลี่ย มีการใช้งาน Automated Insights เพื่อช่วยสรุปผลสารสนเทศอัตโนมัติ</p>
-            <p>3.2.3 นวัตกรรม AI สามารถสร้างข้อมูล KPI ที่สำคัญให้แก่ผู้บริหารได้แบบ Real-time ข้อมูลเชิงลึกนี้สนับสนุนการตัดสินใจเชิงนโยบาย โดยสามารถลดความผิดพลาดในการตัดสินใจได้ร้อยละ 90</p>
-        </div>
+        <h3 class="subsection-title">4.1 การพัฒนาระบบบริหารจัดการสถานศึกษา (10 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>4.1.1 โครงสร้างระบบข้อมูล:</strong> มีการพัฒนาระบบเชื่อมต่อข้อมูล (Data Pipeline) ดึง Data Source มาจากระบบ SGS และ DMC API</li>
+            <li><strong>4.1.2 โมดูลนวัตกรรมปัญญาประดิษฐ์ (AI) ที่พัฒนา:</strong> ใช้ AI Engine ที่พัฒนาด้วยภาษา Python เพื่อทำการวิเคราะห์เรียนรู้ของเครื่อง (ML Analysis) ใช้โมเดล Predictive Modeling ระบบประมวลผลแบบ Automated Insights ผ่าน Google Apps Script</li>
+            <li><strong>4.1.3 ระบบ Dashboard และการรายงาน:</strong> แสดงผล Visualization ของข้อมูลผ่าน Looker Studio Dashboard</li>
+            <li><strong>4.1.4 ขั้นตอนการดำเนินงาน:</strong> แบ่งไทม์ไลน์เป็น 3 ระยะ 
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;- เดือนที่ 1-2: พัฒนาระบบเชื่อมต่อข้อมูล (Data Pipeline)
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;- เดือนที่ 3-4: สร้างโมเดล AI และออกแบบ Dashboard สำหรับผู้บริหาร
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;- เดือนที่ 5-6: ทดสอบระบบ (UAT) และขยายผลการใช้งานจริง
+            </li>
+        </ul>
 
-        <p class="bold pl-1 mt-1">3.3 เหตุผลและความจำเป็นในการเลือกใช้นวัตกรรมปัญญาประดิษฐ์ (AI) (9 คะแนน)</p>
-        <div class="pl-2">
-            <p>- เพื่อลดระยะเวลาการเข้าถึงข้อมูลของผู้บริหารและครู โดยลดเวลาการสืบค้นข้อมูลจากเดิม 1 ชั่วโมง เหลือเพียง 30 วินาที</p>
-            <p>- เพื่อลดภาระงานเอกสารที่ซ้ำซ้อนของครูที่ปรึกษา ซึ่งแต่เดิมต้องใช้เวลาทำเอกสารถึง 8 ชั่วโมงต่อสัปดาห์</p>
-            <p>- เพื่อเพิ่มประสิทธิภาพการตัดสินใจเชิงนโยบายของผู้บริหาร โดยมีเป้าหมายในการลดความผิดพลาดในการตัดสินใจได้ร้อยละ 90 ด้วยการดู KPI แบบ Real-time</p>
-            <p>- เพื่อแก้ไขปัญหาความล่าช้าในการติดตามผู้เรียน โดยใช้ AI ทำนายกลุ่มเสี่ยงล่วงหน้าแทนระบบเดิมที่ผู้บริหารเห็นปัญหาล่าช้าเกิน 1 เดือน</p>
-        </div>
+        <h3 class="subsection-title">4.2 ความเป็นไปได้ในการพัฒนา ทดลองใช้ และประเมินผล (10 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>4.2.1 ความพร้อมด้านทรัพยากรและเทคโนโลยี:</strong> เครื่องมือที่ใช้ประกอบด้วย SGS/DMC API, Python & ML Analysis, Google Apps Script และ Looker Studio ด้านบุคลากร ทีมพัฒนามีทักษะและผ่านการอบรม Python for AI ด้านทรัพยากร โรงเรียนสนับสนุน Server และระบบ Google Workspace แบบ Enterprise ให้ใช้งาน</li>
+            <li><strong>4.2.2 แผนการทดลองใช้:</strong> กลุ่มเป้าหมายคือคณะครู ผู้บริหาร และนักเรียนในโรงเรียนหารเทารังสีประชาสรรค์ สพม.พัทลุง ระยะเวลาในการทดสอบ (UAT) และการใช้งานจริงจะอยู่ในช่วงเดือนที่ 5-6 ของโครงการ วิธีการเก็บข้อมูลทำได้โดยการใช้ API ดึงสถิติการมาเรียนและเกรดเฉลี่ยจากระบบส่วนกลาง</li>
+            <li><strong>4.2.3 แผนการประเมินผลและตัวชี้วัดความสำเร็จ:</strong> เครื่องมือวัดผลอ้างอิงจากข้อมูล KPI สำคัญที่ผู้บริหารสามารถเรียกดูได้แบบ Real-time ตัวชี้วัดเชิงปริมาณได้แก่ การลดเวลาเข้าถึงข้อมูลเหลือ 30 วินาที และลดความผิดพลาดการตัดสินใจของผู้บริหารร้อยละ 90 วิเคราะห์ข้อมูลโดยใช้โมเดล AI ในการทำนายและสรุปผล สำหรับแนวทางบริหารจัดการในระยะยาว มีแผนขยายเป็น Open API สำหรับกลุ่มโรงเรียนเครือข่ายในปีการศึกษาถัดไปเพื่อสร้างมาตรฐานร่วมกัน</li>
+        </ul>
 
-        <!-- ส่วนที่ 4 -->
-        <p class="bold mt-2 page-break">ส่วนที่ 4 การออกแบบนวัตกรรมและกระบวนการดำเนินงาน (30 คะแนน)</p>
-        
-        <p class="bold pl-1">4.1 การพัฒนาระบบบริหารจัดการสถานศึกษา (10 คะแนน)</p>
-        <div class="pl-2">
-            <p><span class="bold">4.1.1 โครงสร้างระบบข้อมูล :</span> มีการพัฒนาระบบเชื่อมต่อข้อมูล (Data Pipeline) ดึง Data Source มาจากระบบ SGS และ DMC API</p>
-            <p><span class="bold">4.1.2 โมดูลนวัตกรรมปัญญาประดิษฐ์ (AI) ที่พัฒนา :</span> ใช้ AI Engine ที่พัฒนาด้วยภาษา Python เพื่อทำการวิเคราะห์เรียนรู้ของเครื่อง (ML Analysis) ใช้โมเดล Predictive Modeling ระบบประมวลผลแบบ Automated Insights ผ่าน Google Apps Script</p>
-            <p><span class="bold">4.1.3 ระบบ Dashboard และการรายงาน :</span> แสดงผล Visualization ของข้อมูลผ่าน Looker Studio Dashboard</p>
-            <p><span class="bold">4.1.4 ขั้นตอนการดำเนินงาน :</span> แบ่งไทม์ไลน์เป็น 3 ระยะ เดือนที่ 1-2 พัฒนาระบบเชื่อมต่อข้อมูล (Data Pipeline) เดือนที่ 3-4 สร้างโมเดล AI และออกแบบ Dashboard สำหรับผู้บริหาร เดือนที่ 5-6 ทดสอบระบบ (UAT) และขยายผลการใช้งานจริง</p>
-        </div>
+        <h3 class="subsection-title">4.3 ความสอดคล้องของนวัตกรรมกับวัตถุประสงค์ตามบริบทของสถานศึกษา (10 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>4.3.1 ความเชื่อมโยงกับวัตถุประสงค์ของโครงการ:</strong><br>
+                1. ช่วยลดภาระงานเอกสารเพื่อให้ครูที่ปรึกษามีเวลาทำวิจัยในชั้นเรียน (CAR) และดูแลนักเรียนได้ใกล้ชิดขึ้น<br>
+                2. กระตุ้นให้เกิดวัฒนธรรมการใช้ Data-Driven ในการทำงาน<br>
+                3. สร้างรากฐานสู่การเป็น Smart School อย่างแท้จริง
+            </li>
+            <li><strong>4.3.2 ความเหมาะสมกับบริบทและโครงสร้างการบริหารของสถานศึกษา:</strong><br>
+                1) เหมาะสมกับทรัพยากรที่มีอยู่เนื่องจากได้รับการสนับสนุน Server และ Google Workspace แบบ Enterprise จากทางโรงเรียนเรียบร้อยแล้ว<br>
+                2) สามารถใช้งานจริงโดยไม่เพิ่มภาระ เพราะระบบจะทำงานประมวลผลอัตโนมัติ (Automated Insights) โดยไม่ต้องคีย์ข้อมูลซ้ำซ้อน<br>
+                3) โครงการนี้ยังมีศักยภาพในการขยายผลให้สอดคล้องกับขนาดของเครือข่าย โดยมีเป้าหมายทำระบบเป็น Open API สำหรับกลุ่มโรงเรียน สพม.พัทลุง เพื่อสร้างมาตรฐานข้อมูลร่วมกันในปีหน้า
+            </li>
+        </ul>
 
-        <p class="bold pl-1 mt-1">4.2 ความเป็นไปได้ในการพัฒนา ทดลองใช้ และประเมินผล (10 คะแนน)</p>
-        <div class="pl-2">
-            <p><span class="bold">4.2.1 ความพร้อมด้านทรัพยากรและเทคโนโลยี :</span> เครื่องมือที่ใช้ประกอบด้วย SGS/DMC API, Python & ML Analysis, Google Apps Script และ Looker Studio ด้านบุคลากร ทีมพัฒนามีทักษะและผ่านการอบรม Python for AI ด้านทรัพยากร โรงเรียนสนับสนุน Server และระบบ Google Workspace แบบ Enterprise ให้ใช้งาน</p>
-            <p><span class="bold">4.2.2 แผนการทดลองใช้ :</span> กลุ่มเป้าหมายคือคณะครู ผู้บริหาร และนักเรียนในโรงเรียนหารเทารังสีประชาสรรค์ สพม.พัทลุง ระยะเวลาในการทดสอบ (UAT) และการใช้งานจริงจะอยู่ในช่วงเดือนที่ 5-6 ของโครงการ วิธีการเก็บข้อมูลทำได้โดยการใช้ API ดึงสถิติการมาเรียนและเกรดเฉลี่ยจากระบบส่วนกลาง</p>
-            <p><span class="bold">4.2.3 แผนการประเมินผลและตัวชี้วัดความสำเร็จ :</span> เครื่องมือวัดผลอ้างอิงจากข้อมูล KPI สำคัญที่ผู้บริหารสามารถเรียกดูได้แบบ Real-time ตัวชี้วัดเชิงปริมาณได้แก่ การลดเวลาเข้าถึงข้อมูลเหลือ 30 วินาที และลดความผิดพลาดการตัดสินใจของผู้บริหารร้อยละ 90 วิเคราะห์ข้อมูลโดยใช้โมเดล AI ในการทำนายและสรุปผล สำหรับแนวทางบริหารจัดการในระยะยาว มีแผนขยายเป็น Open API สำหรับกลุ่มโรงเรียนเครือข่ายในปีการศึกษาถัดไปเพื่อสร้างมาตรฐานร่วมกัน</p>
-        </div>
+        <!-- Section 5 -->
+        <div class="page-break-before"></div>
+        <h2 class="text-2xl font-bold section-title">ส่วนที่ 5 ความพร้อมและศักยภาพของสถานศึกษา (18 คะแนน)</h2>
 
-        <p class="bold pl-1 mt-1">4.3 ความสอดคล้องของนวัตกรรมกับวัตถุประสงค์ตามบริบทของสถานศึกษา (10 คะแนน)</p>
-        <p class="bold pl-2">4.3.1 ความเชื่อมโยงกับวัตถุประสงค์ของโครงการ</p>
-        <div class="pl-2 indent">
-            <p>1) ช่วยลดภาระงานเอกสารเพื่อให้ครูที่ปรึกษามีเวลาทำวิจัยในชั้นเรียน (CAR) และดูแลนักเรียนได้ใกล้ชิดขึ้น</p>
-            <p>2) กระตุ้นให้เกิดวัฒนธรรมการใช้ Data-Driven ในการทำงาน</p>
-            <p>3) สร้างรากฐานสู่การเป็น Smart School อย่างแท้จริง</p>
-        </div>
-        <p class="bold pl-2 mt-1">4.3.2 ความเหมาะสมกับบริบทและโครงสร้างการบริหารของสถานศึกษา</p>
-        <div class="pl-2 indent">
-            <p>1) เหมาะสมกับทรัพยากรที่มีอยู่เนื่องจากได้รับการสนับสนุน Server และ Google Workspace แบบ Enterprise จากทางโรงเรียนเรียบร้อยแล้ว</p>
-            <p>2) สามารถใช้งานจริงโดยไม่เพิ่มภาระ เพราะระบบจะทำงานประมวลผลอัตโนมัติ (Automated Insights) โดยไม่ต้องคีย์ข้อมูลซ้ำซ้อน</p>
-            <p>3) โครงการนี้ยังมีศักยภาพในการขยายผลให้สอดคล้องกับขนาดของเครือข่าย โดยมีเป้าหมายทำระบบเป็น Open API สำหรับกลุ่มโรงเรียน สพม.พัทลุง เพื่อสร้างมาตรฐานข้อมูลร่วมกันในปีหน้า</p>
-        </div>
+        <h3 class="subsection-title">5.1 ความพร้อมของผู้บริหาร ครูและบุคลากรทางการศึกษา (9 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>5.1.1 บทบาทของผู้บริหารในการสนับสนุนโครงการ:</strong> ผู้บริหารมีนโยบายส่งเสริมการใช้เทคโนโลยีเพื่อลดภาระงานเอกสารของครู และสนับสนุนการนำข้อมูลสารสนเทศมาใช้บริหารจัดการสถานศึกษา โรงเรียนให้การสนับสนุนทรัพยากรพื้นฐานที่มีอยู่แล้ว ได้แก่ พื้นที่ Server ของโรงเรียน และระบบ Google Workspace แบบ Enterprise เพื่อใช้ในการพัฒนาระบบ ผู้บริหารพร้อมให้ความร่วมมือในการทดลองใช้งานระบบ Dashboard เพื่อดูข้อมูลภาพรวม (KPI) ประกอบการบริหารจัดการสถานศึกษา</li>
+            <li><strong>5.1.2 ศักยภาพของครูผู้ดำเนินโครงการ:</strong> ทีมพัฒนามีพื้นฐานทักษะด้านเทคโนโลยี โดยได้ผ่านการอบรมหลักสูตร Python for AI และสามารถใช้งาน Google Apps Script ในการดึงและจัดการข้อมูลเบื้องต้นได้ ครูมีประสบการณ์ในการใช้งานแพลตฟอร์มการศึกษาพื้นฐานของกระทรวงฯ เช่น ระบบ SGS และระบบ DMC ทำให้เข้าใจโครงสร้างข้อมูลนักเรียนเป็นอย่างดี มีความมุ่งมั่นที่จะนำเทคโนโลยีมาช่วยลดเวลาการทำเอกสารซ้ำซ้อนเพื่อให้มีเวลาในการทำวิจัยในชั้นเรียน (CAR) และดูแลนักเรียนได้ใกล้ชิดขึ้น</li>
+            <li><strong>5.1.3 การมีส่วนร่วมของครูและบุคลากรในสถานศึกษา:</strong> มีการจัดตั้งทีมงาน (Team: Bad GateWay) ที่ประกอบด้วยครูที่ปรึกษาและนักเรียนแกนนำร่วมกันพัฒนาโครงการ ได้รับข้อมูลสะท้อนปัญหา (Pain Point) จากกลุ่มครูที่ปรึกษาที่ต้องใช้เวลาทำเอกสารกว่า 8 ชั่วโมง/สัปดาห์ ทำให้สามารถออกแบบระบบได้ตรงกับความต้องการของครูส่วนใหญ่ในโรงเรียน</li>
+        </ul>
 
-        <!-- ส่วนที่ 5 -->
-        <p class="bold mt-2">ส่วนที่ 5 ความพร้อมและศักยภาพของสถานศึกษา (18 คะแนน)</p>
-        
-        <p class="bold pl-1">5.1 ความพร้อมของผู้บริหาร ครูและบุคลากรทางการศึกษา (9 คะแนน)</p>
-        <div class="pl-2">
-            <p><span class="bold">5.1.1 บทบาทของผู้บริหารในการสนับสนุนโครงการ :</span> ผู้บริหารมีนโยบายส่งเสริมการใช้เทคโนโลยีเพื่อลดภาระงานเอกสารของครู และสนับสนุนการนำข้อมูลสารสนเทศมาใช้บริหารจัดการสถานศึกษา โรงเรียนให้การสนับสนุนทรัพยากรพื้นฐานที่มีอยู่แล้ว ได้แก่ พื้นที่ Server ของโรงเรียน และระบบ Google Workspace แบบ Enterprise เพื่อใช้ในการพัฒนาระบบ ผู้บริหารพร้อมให้ความร่วมมือในการทดลองใช้งานระบบ Dashboard เพื่อดูข้อมูลภาพรวม (KPI) ประกอบการบริหารจัดการสถานศึกษา</p>
-            <p><span class="bold">5.1.2 ศักยภาพของครูผู้ดำเนินโครงการ :</span> ทีมพัฒนามีพื้นฐานทักษะด้านเทคโนโลยี โดยได้ผ่านการอบรมหลักสูตร Python for AI และสามารถใช้งาน Google Apps Script ในการดึงและจัดการข้อมูลเบื้องต้นได้ ครูมีประสบการณ์ในการใช้งานแพลตฟอร์มการศึกษาพื้นฐานของกระทรวงฯ เช่น ระบบ SGS และระบบ DMC ทำให้เข้าใจโครงสร้างข้อมูลนักเรียนเป็นอย่างดี มีความมุ่งมั่นที่จะนำเทคโนโลยีมาช่วยลดเวลาการทำเอกสารซ้ำซ้อนเพื่อให้มีเวลาในการทำวิจัยในชั้นเรียน (CAR) และดูแลนักเรียนได้ใกล้ชิดขึ้น</p>
-            <p><span class="bold">5.1.3 การมีส่วนร่วมของครูและบุคลากร :</span> ในสถานศึกษามีการจัดตั้งทีมงาน (Team: Bad GateWay) ที่ประกอบด้วยครูที่ปรึกษาและนักเรียนแกนนำร่วมกันพัฒนาโครงการ ได้รับข้อมูลสะท้อนปัญหา (Pain Point) จากกลุ่มครูที่ปรึกษาที่ต้องใช้เวลาทำเอกสารกว่า 8 ชั่วโมง/สัปดาห์ ทำให้สามารถออกแบบระบบได้ตรงกับความต้องการของครูส่วนใหญ่ในโรงเรียน</p>
-        </div>
+        <h3 class="subsection-title">5.2 ความพร้อมด้านโครงสร้างพื้นฐาน เทคโนโลยี และทรัพยากรสนับสนุน (9 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>5.2.1 โครงสร้างพื้นฐานด้านเทคโนโลยี:</strong> โรงเรียนมีระบบเครือข่ายอินเทอร์เน็ตพื้นฐานที่ครอบคลุมพื้นที่ห้องปฏิบัติการและห้องพักครู ซึ่งเพียงพอต่อการดึงข้อมูลและอัปเดต Dashboard อาศัยอุปกรณ์ดิจิทัลพื้นฐานที่มีอยู่ เช่น คอมพิวเตอร์ส่วนกลางของโรงเรียน และคอมพิวเตอร์พกพาประจำตัวของครูในการใช้งานระบบ ใช้พื้นที่ห้องปฏิบัติการคอมพิวเตอร์ของโรงเรียนเป็นศูนย์กลางในการพัฒนาระบบและทดสอบการทำงาน</li>
+            <li><strong>5.2.2 ระบบและเครื่องมือที่ใช้สนับสนุนการพัฒนานวัตกรรมปัญญาประดิษฐ์ (AI):</strong> ใช้แพลตฟอร์มและเครื่องมือที่ไม่เสียค่าใช้จ่ายเพิ่มเติม เช่น ภาษา Python สำหรับสร้างโมเดล AI เบื้องต้น, Google Apps Script สำหรับดึงข้อมูลอัตโนมัติ และ Looker Studio สำหรับทำ Dashboard ใช้ระบบฐานข้อมูลหลักที่โรงเรียนใช้งานอยู่แล้วในปัจจุบัน คือ ข้อมูลจากระบบ SGS และ DMC</li>
+            <li><strong>5.2.3 งบประมาณและทรัพยากรสนับสนุน:</strong> โครงการนี้ไม่ต้องพึ่งพางบประมาณจัดซื้อเพิ่มเติม เนื่องจากเป็นการใช้ทรัพยากรเดิมที่โรงเรียนสนับสนุนอยู่แล้ว คือ Server และ Google Workspace หากการพัฒนาระบบในโรงเรียนสำเร็จ มีแผนที่จะจัดทำเป็นรูปแบบ Open API เพื่อให้กลุ่มโรงเรียนเครือข่าย สพม.พัทลุง นำไปใช้งานได้ฟรีในปีการศึกษาหน้า เพื่อให้เกิดความคุ้มค่าและยั่งยืน</li>
+            <li><strong>5.2.4 ความมั่นคงปลอดภัยและการคุ้มครองข้อมูล:</strong> ข้อมูลนักเรียนถูกจัดการและจัดเก็บภายใต้ระบบ Server ของโรงเรียนและ Google Workspace ที่มีมาตรฐานความปลอดภัยของระบบสถานศึกษา มีการจำกัดสิทธิ์การเข้าถึงข้อมูลตามหน้าที่ โดยผู้บริหารสามารถดูภาพรวมสรุปผลได้ และครูที่ปรึกษาจะเข้าถึงได้เฉพาะข้อมูลของนักเรียนในความดูแลของตนเองเท่านั้น การดึงข้อมูลผ่าน Data Pipeline จากระบบ SGS / DMC จะดำเนินการแบบปิดเฉพาะผู้มีสิทธิ์ในโดเมนของโรงเรียน เพื่อป้องกันข้อมูลรั่วไหลออกสู่สาธารณะ</li>
+        </ul>
 
-        <p class="bold pl-1 mt-1">5.2 ความพร้อมด้านโครงสร้างพื้นฐาน เทคโนโลยี และทรัพยากรสนับสนุน (9 คะแนน)</p>
-        <div class="pl-2">
-            <p><span class="bold">5.2.1 โครงสร้างพื้นฐานด้านเทคโนโลยี :</span> โรงเรียนมีระบบเครือข่ายอินเทอร์เน็ตพื้นฐานที่ครอบคลุมพื้นที่ห้องปฏิบัติการและห้องพักครู ซึ่งเพียงพอต่อการดึงข้อมูลและอัปเดต Dashboard อาศัยอุปกรณ์ดิจิทัลพื้นฐานที่มีอยู่ เช่น คอมพิวเตอร์ส่วนกลางของโรงเรียน และคอมพิวเตอร์พกพาประจำตัวของครูในการใช้งานระบบ ใช้พื้นที่ห้องปฏิบัติการคอมพิวเตอร์ของโรงเรียนเป็นศูนย์กลางในการพัฒนาระบบและทดสอบการทำงาน</p>
-            <p><span class="bold">5.2.2 ระบบและเครื่องมือที่ใช้สนับสนุนการพัฒนานวัตกรรมปัญญาประดิษฐ์ (AI) :</span> ใช้แพลตฟอร์มและเครื่องมือที่ไม่เสียค่าใช้จ่ายเพิ่มเติม เช่น ภาษา Python สำหรับสร้างโมเดล AI เบื้องต้น, Google Apps Script สำหรับดึงข้อมูลอัตโนมัติ และ Looker Studio สำหรับทำ Dashboard ใช้ระบบฐานข้อมูลหลักที่โรงเรียนใช้งานอยู่แล้วในปัจจุบัน คือ ข้อมูลจากระบบ SGS และ DMC</p>
-            <p><span class="bold">5.2.3 งบประมาณและทรัพยากรสนับสนุน :</span> โครงการนี้ไม่ต้องพึ่งพางบประมาณจัดซื้อเพิ่มเติม เนื่องจากเป็นการใช้ทรัพยากรเดิมที่โรงเรียนสนับสนุนอยู่แล้ว คือ Server และ Google Workspace หากการพัฒนาระบบในโรงเรียนสำเร็จ มีแผนที่จะจัดทำเป็นรูปแบบ Open API เพื่อให้กลุ่มโรงเรียนเครือข่าย สพม.พัทลุง นำไปใช้งานได้ฟรีในปีการศึกษาหน้า เพื่อให้เกิดความคุ้มค่าและยั่งยืน</p>
-            <p><span class="bold">5.2.4 ความมั่นคงปลอดภัยและการคุ้มครองข้อมูล :</span> ข้อมูลนักเรียนถูกจัดการและจัดเก็บภายใต้ระบบ Server ของโรงเรียนและ Google Workspace ที่มีมาตรฐานความปลอดภัยของระบบสถานศึกษา มีการจำกัดสิทธิ์การเข้าถึงข้อมูลตามหน้าที่ โดยผู้บริหารสามารถดูภาพรวมสรุปผลได้ และครูที่ปรึกษาจะเข้าถึงได้เฉพาะข้อมูลของนักเรียนในความดูแลของตนเองเท่านั้น การดึงข้อมูลผ่าน Data Pipeline จากระบบ SGS / DMC จะดำเนินการแบบปิดเฉพาะผู้มีสิทธิ์ในโดเมนของโรงเรียน เพื่อป้องกันข้อมูลรั่วไหลออกสู่สาธารณะ</p>
-        </div>
+        <!-- Section 6 -->
+        <h2 class="text-2xl font-bold section-title">ส่วนที่ 6 ผลลัพธ์ที่คาดว่าจะเกิดขึ้น (18 คะแนน)</h2>
 
-        <!-- ส่วนที่ 6 -->
-        <p class="bold mt-2 page-break">ส่วนที่ 6 ผลลัพธ์ที่คาดว่าจะเกิดขึ้น (18 คะแนน)</p>
-        
-        <p class="bold pl-1">6.1 ด้านการกำหนดนโยบายและทิศทางเชิงกลยุทธ์ของสถานศึกษา (6 คะแนน)</p>
-        <div class="pl-2">
-            <p><span class="bold">6.1.1 ความสอดคล้องกับวิสัยทัศน์และยุทธศาสตร์ของสถานศึกษา :</span> โครงการนี้สอดคล้องกับเป้าหมายการพัฒนาคุณภาพการศึกษาในการสร้างรากฐานสู่การเป็น Smart School อย่างแท้จริง โดยส่งเสริมวัฒนธรรมการใช้ Data-Driven ในการทำงาน เป้าหมายเชิงปริมาณที่คาดหวังคือการลดเวลาการเข้าถึงข้อมูลจาก 1 ชั่วโมง เหลือเพียง 30 วินาที และช่วยลดความผิดพลาดในการตัดสินใจเชิงนโยบายของผู้บริหารได้ร้อยละ 90</p>
-            <p><span class="bold">6.1.2 การยกระดับคุณภาพผู้เรียนผ่านระบบบริหารจัดการ :</span> คุณภาพผู้เรียนจะได้รับการดูแลอย่างทันท่วงที ลดอัตราการหลุดออกจากระบบการศึกษา เนื่องจากระบบ AI (Predictive Modeling) จะทำนายกลุ่มเสี่ยงล่วงหน้า ข้อมูลที่ใช้ติดตามประกอบด้วยสถิติการมาเรียนและผลสัมฤทธิ์ (เกรดเฉลี่ย) ซึ่งดึงมาจากระบบ SGS และ DMC ของสถานศึกษา</p>
-            <p><span class="bold">6.1.3 การตัดสินใจบนฐานข้อมูล :</span> ผู้บริหารสามารถใช้ข้อมูล KPI สำคัญบน Dashboard แบบ Real-time เพื่อวิเคราะห์และแก้ไขปัญหาได้อย่างรวดเร็ว แทนระบบเดิมที่ผู้บริหารจะมองเห็นภาพรวมปัญหาผู้เรียนล่าช้าเกิน 1 เดือน มีกลไกติดตามผ่าน Automated Insights ที่สรุปผลสารสนเทศระดับโรงเรียนให้อัตโนมัติ โดยอัปเดตข้อมูลตามรอบเวลาจริง</p>
-        </div>
+        <h3 class="subsection-title">6.1 ด้านการกำหนดนโยบายและทิศทางเชิงกลยุทธ์ของสถานศึกษา (6 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>6.1.1 ความสอดคล้องกับวิสัยทัศน์และยุทธศาสตร์ของสถานศึกษา:</strong> โครงการนี้สอดคล้องกับเป้าหมายการพัฒนาคุณภาพการศึกษาในการสร้างรากฐานสู่การเป็น Smart School อย่างแท้จริง โดยส่งเสริมวัฒนธรรมการใช้ Data-Driven ในการทำงาน เป้าหมายเชิงปริมาณที่คาดหวังคือการลดเวลาการเข้าถึงข้อมูลจาก 1 ชั่วโมง เหลือเพียง 30 วินาที และช่วยลดความผิดพลาดในการตัดสินใจเชิงนโยบายของผู้บริหารได้ร้อยละ 90</li>
+            <li><strong>6.1.2 การยกระดับคุณภาพผู้เรียนผ่านระบบบริหารจัดการ:</strong> คุณภาพผู้เรียนจะได้รับการดูแลอย่างทันท่วงที ลดอัตราการหลุดออกจากระบบการศึกษา เนื่องจากระบบ AI (Predictive Modeling) จะทำนายกลุ่มเสี่ยงล่วงหน้า ข้อมูลที่ใช้ติดตามประกอบด้วยสถิติการมาเรียนและผลสัมฤทธิ์ (เกรดเฉลี่ย) ซึ่งดึงมาจากระบบ SGS และ DMC ของสถานศึกษา</li>
+            <li><strong>6.1.3 การตัดสินใจบนฐานข้อมูล:</strong> ผู้บริหารสามารถใช้ข้อมูล KPI สำคัญบน Dashboard แบบ Real-time เพื่อวิเคราะห์และแก้ไขปัญหาได้อย่างรวดเร็ว แทนระบบเดิมที่ผู้บริหารจะมองเห็นภาพรวมปัญหาผู้เรียนล่าช้าเกิน 1 เดือน มีกลไกติดตามผ่าน Automated Insights ที่สรุปผลสารสนเทศระดับโรงเรียนให้อัตโนมัติ โดยอัปเดตข้อมูลตามรอบเวลาจริง</li>
+        </ul>
 
-        <p class="bold pl-1 mt-1">6.2 ด้านการบริหารทรัพยากรและการพัฒนาศักยภาพบุคลากร (6 คะแนน)</p>
-        <div class="pl-2">
-            <p><span class="bold">6.2.1 การบริหารทรัพยากรอย่างคุ้มค่าและเหมาะสมกับบริบทของสถานศึกษา :</span> โครงการเน้นการจัดสรรและใช้ประโยชน์จากทรัพยากรที่มีอยู่แล้วอย่างเต็มประสิทธิภาพ ได้แก่ Server ของโรงเรียน และระบบ Google Workspace แบบ Enterprise มีความคุ้มค่าและเป็นไปได้สูงมาก เนื่องจากพัฒนาด้วยเครื่องมือที่ไม่ต้องเสียค่าใช้จ่ายเพิ่มเติม (เช่น Python, Google Apps Script) และลดภาระงานซ้ำซ้อนได้จริง</p>
-            <p><span class="bold">6.2.2 การพัฒนาศักยภาพบุคลากรและผู้นำการเปลี่ยนแปลง :</span> เกิดกระบวนการแลกเปลี่ยนเรียนรู้ (PLC) ระหว่างครูที่ปรึกษาผู้ใช้งาน และทีมพัฒนาระบบ เพื่อปรับปรุงเครื่องมือให้ตอบโจทย์การทำงานจริงในโรงเรียน เกิดทีมแกนนำนวัตกรรม (Team: Bad GateWay) ซึ่งประกอบด้วยนักเรียนและครูที่ปรึกษา เป็นกลไกสำคัญในการขับเคลื่อนโครงการ</p>
-            <p><span class="bold">6.2.3 การประยุกต์ใช้นวัตกรรมปัญญาประดิษฐ์ (AI) ในระบบบริหารจัดการ :</span> มีการใช้ AI ในการวิเคราะห์ข้อมูลนักเรียนเพื่อค้นหากลุ่มเสี่ยง (Predictive Modeling) และใช้ระบบสร้างรายงานอัตโนมัติ (Automated Insights) ผลลัพธ์ที่ได้คือครูที่ปรึกษาสามารถลดภาระงานเอกสาร (จากเดิมกว่า 8 ชม./สัปดาห์) ทำให้มีเวลาคืนสู่ห้องเรียน ทำวิจัยในชั้นเรียน (CAR) และดูแลนักเรียนได้ใกล้ชิดขึ้น</p>
-        </div>
+        <h3 class="subsection-title">6.2 ด้านการบริหารทรัพยากรและการพัฒนาศักยภาพบุคลากร (6 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>6.2.1 การบริหารทรัพยากรอย่างคุ้มค่าและเหมาะสมกับบริบทของสถานศึกษา:</strong> โครงการเน้นการจัดสรรและใช้ประโยชน์จากทรัพยากรที่มีอยู่แล้วอย่างเต็มประสิทธิภาพ ได้แก่ Server ของโรงเรียน และระบบ Google Workspace แบบ Enterprise มีความคุ้มค่าและเป็นไปได้สูงมาก เนื่องจากพัฒนาด้วยเครื่องมือที่ไม่ต้องเสียค่าใช้จ่ายเพิ่มเติม (เช่น Python, Google Apps Script) และลดภาระงานซ้ำซ้อนได้จริง</li>
+            <li><strong>6.2.2 การพัฒนาศักยภาพบุคลากรและผู้นำการเปลี่ยนแปลง:</strong> เกิดกระบวนการแลกเปลี่ยนเรียนรู้ (PLC) ระหว่างครูที่ปรึกษาผู้ใช้งาน และทีมพัฒนาระบบ เพื่อปรับปรุงเครื่องมือให้ตอบโจทย์การทำงานจริงในโรงเรียน เกิดทีมแกนนำนวัตกรรม (Team: Bad GateWay) ซึ่งประกอบด้วยนักเรียนและครูที่ปรึกษา เป็นกลไกสำคัญในการขับเคลื่อนโครงการ</li>
+            <li><strong>6.2.3 การประยุกต์ใช้นวัตกรรมปัญญาประดิษฐ์ (AI) ในระบบบริหารจัดการ:</strong> มีการใช้ AI ในการวิเคราะห์ข้อมูลนักเรียนเพื่อค้นหากลุ่มเสี่ยง (Predictive Modeling) และใช้ระบบสร้างรายงานอัตโนมัติ (Automated Insights) ผลลัพธ์ที่ได้คือครูที่ปรึกษาสามารถลดภาระงานเอกสาร (จากเดิมกว่า 8 ชม./สัปดาห์) ทำให้มีเวลาคืนสู่ห้องเรียน ทำวิจัยในชั้นเรียน (CAR) และดูแลนักเรียนได้ใกล้ชิดขึ้น</li>
+        </ul>
 
-        <p class="bold pl-1 mt-1">6.3 ด้านการพัฒนาระบบบริหารจัดการและการเปลี่ยนแปลงองค์กร (6 คะแนน)</p>
-        <div class="pl-2">
-            <p><span class="bold">6.3.1 การออกแบบระบบหรือกระบวนการทำงานใหม่ :</span> กระบวนการทำงานเปลี่ยนจากการจัดการข้อมูลผ่านรายงานกระดาษและ Checklist มาเป็นการใช้ Data Pipeline เชื่อมข้อมูลอัตโนมัติ และแสดงผลบน Looker Studio Dashboard ความแตกต่างจากแนวปฏิบัติเดิมคือ การเปลี่ยนผ่านจากการวิเคราะห์ข้อมูล "แบบย้อนหลังและซ้ำซ้อน" สู่การบริหารจัดการแบบ "Real-time"</p>
-            <p><span class="bold">6.3.2 การขยายผลและการบูรณาการทั้งสถานศึกษา :</span> เมื่อทดลองใช้และปรับปรุงระบบ (UAT) เสร็จสิ้น มีแนวทางพัฒนาต่อยอดเป็น Open API เพื่อขยายผลให้กับกลุ่มโรงเรียนเครือข่าย สพม.พัทลุง ในปีการศึกษาหน้า ระบบนี้จะถูกบูรณาการเข้าเป็นส่วนหนึ่งของการติดตามดูแลนักเรียนประจำวันและประจำภาคเรียน เพื่อสร้างมาตรฐานการจัดการข้อมูลร่วมกันอย่างยั่งยืน</p>
-        </div>
+        <h3 class="subsection-title">6.3 ด้านการพัฒนาระบบบริหารจัดการและการเปลี่ยนแปลงองค์กร (6 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>6.3.1 การออกแบบระบบหรือกระบวนการทำงานใหม่:</strong> กระบวนการทำงานเปลี่ยนจากการจัดการข้อมูลผ่านรายงานกระดาษและ Checklist มาเป็นการใช้ Data Pipeline เชื่อมข้อมูลอัตโนมัติ และแสดงผลบน Looker Studio Dashboard ความแตกต่างจากแนวปฏิบัติเดิมคือ การเปลี่ยนผ่านจากการวิเคราะห์ข้อมูล "แบบย้อนหลังและซ้ำซ้อน" สู่การบริหารจัดการแบบ "Real-time"</li>
+            <li><strong>6.3.2 การขยายผลและการบูรณาการทั้งสถานศึกษา:</strong> เมื่อทดลองใช้และปรับปรุงระบบ (UAT) เสร็จสิ้น มีแนวทางพัฒนาต่อยอดเป็น Open API เพื่อขยายผลให้กับกลุ่มโรงเรียนเครือข่าย สพม.พัทลุง ในปีการศึกษาหน้า ระบบนี้จะถูกบูรณาการเข้าเป็นส่วนหนึ่งของการติดตามดูแลนักเรียนประจำวันและประจำภาคเรียน เพื่อสร้างมาตรฐานการจัดการข้อมูลร่วมกันอย่างยั่งยืน</li>
+        </ul>
 
-        <!-- ส่วนที่ 7 -->
-        <p class="bold mt-2">ส่วนที่ 7 แนวทางการขยายผลและความยั่งยืนของนวัตกรรมปัญญาประดิษฐ์ (AI) (9 คะแนน)</p>
-        
-        <p class="bold pl-1">7.1 แผนการขยายผลภายในสถานศึกษา (3 คะแนน)</p>
-        <div class="pl-2">
-            <p class="bold">7.1.1 การขยายผลเชิงระบบงานบริหารจัดการ</p>
-            <div class="indent pl-1">
-                <p><span class="bold">- ระบบของกลุ่มงานที่มีแผนขยายผล :</span> ในระยะเริ่มต้นโครงการมุ่งเน้นที่ระบบดูแลช่วยเหลือนักเรียน (สำหรับครูที่ปรึกษาและผู้บริหาร) เมื่อระบบเสถียรแล้ว มีแผนขยายผลไปยัง งานวัดผลและวิชาการ (เพื่อวิเคราะห์แนวโน้มผลสัมฤทธิ์รายวิชา) และ งานกิจการนักเรียน (เพื่อประมวลผลสถิติพฤติกรรมและการเข้าร่วมกิจกรรม)</p>
-                <p><span class="bold">- แนวทางการปรับกระบวนการทำงาน :</span> ยกเลิกการใช้แบบบันทึกหรือ Checklist แบบกระดาษในขั้นตอนการรายงานผลประจำเดือน โดยปรับให้ใช้ข้อมูลสารสนเทศที่ประมวลผลผ่านระบบ EduSmart Dashboard เป็นหลักฐานอ้างอิงในการประชุมผู้บริหารและครู</p>
-            </div>
-            
-            <p class="bold mt-1">7.1.2 การพัฒนาศักยภาพบุคลากรและทีมขับเคลื่อน</p>
-            <div class="indent pl-1">
-                <p><span class="bold">- แผนการพัฒนาบุคลากร :</span> จัดอบรมเชิงปฏิบัติการ (Workshop) ภายในโรงเรียนแบบเพื่อนช่วยเพื่อน (PLC) แนะนำการเข้าถึงและการอ่านข้อมูลจาก Dashboard ให้แก่ครูที่ปรึกษาเพื่อให้สามารถนำข้อมูลไปใช้ดูแลนักเรียนได้อย่างมีประสิทธิภาพ</p>
-                <p><span class="bold">- การจัดตั้งคณะทำงาน :</span> จัดตั้ง "ทีมสารสนเทศอัจฉริยะ (Smart Data Team)" โดยมีตัวแทนจากฝ่ายบริหาร ครูคอมพิวเตอร์ และมีกลุ่มนักเรียนแกนนำ (Team: Bad GateWay) เป็นผู้ช่วยสนับสนุนด้านเทคนิคในการดูแลรักษาระบบร่วมด้วย</p>
-            </div>
-        </div>
+        <!-- Section 7 -->
+        <div class="page-break-before"></div>
+        <h2 class="text-2xl font-bold section-title">ส่วนที่ 7 แนวทางการขยายผลและความยั่งยืน (9 คะแนน)</h2>
 
-        <p class="bold pl-1 mt-1">7.2 แผนการขยายผลสู่เครือข่ายภายในหรือภายนอกสถานศึกษา (3 คะแนน)</p>
-        <div class="pl-2">
-            <p class="bold">7.2.1 การเผยแพร่และถอดบทเรียนเชิงบริหาร</p>
-            <div class="indent pl-1">
-                <p><span class="bold">- การจัดทำรายงานผล :</span> ถอดบทเรียนกระบวนการทำงานจัดทำเป็นคู่มือ "Smart School Data Framework ฉบับปฏิบัติจริง” เพื่อสรุปขั้นตอนการสร้าง Dashboard พื้นฐานสำหรับโรงเรียน</p>
-                <p><span class="bold">- ช่องทางการเผยแพร่ :</span> เผยแพร่ผ่านเว็บไซต์ของโรงเรียนหารเทารังสีประชาสรรค์ (https://www.harnthao.ac.th)</p>
-            </div>
-            
-            <p class="bold mt-1">7.2.2 การสร้างความร่วมมือเชิงระบบ</p>
-            <div class="indent pl-1">
-                <p>1) <span class="bold">เครือข่ายที่คาดว่าจะร่วมขยายผล :</span> กลุ่มโรงเรียนเครือข่ายในสังกัด สพม.พัทลุง</p>
-                <p>2) <span class="bold">รูปแบบความร่วมมือ :</span> โครงการมีแผนพัฒนาโมเดลนี้ให้เป็นรูปแบบ Open API เพื่อให้โรงเรียนเครือข่ายสามารถนำไปเชื่อมต่อและใช้งานได้ สร้างมาตรฐานการจัดการข้อมูลร่วมกันในปีการศึกษาหน้า</p>
-            </div>
-        </div>
+        <h3 class="subsection-title">7.1 แผนการขยายผลภายในสถานศึกษา (3 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>7.1.1 การขยายผลเชิงระบบงานบริหารจัดการ:</strong><br>
+                <strong>- ระบบของกลุ่มงานที่มีแผนขยายผล:</strong> ในระยะเริ่มต้นโครงการมุ่งเน้นที่ระบบดูแลช่วยเหลือนักเรียน (สำหรับครูที่ปรึกษาและผู้บริหาร) เมื่อระบบเสถียรแล้ว มีแผนขยายผลไปยัง งานวัดผลและวิชาการ (เพื่อวิเคราะห์แนวโน้มผลสัมฤทธิ์รายวิชา) และ งานกิจการนักเรียน (เพื่อประมวลผลสถิติพฤติกรรมและการเข้าร่วมกิจกรรม)<br>
+                <strong>- แนวทางการปรับกระบวนการทำงาน:</strong> ยกเลิกการใช้แบบบันทึกหรือ Checklist แบบกระดาษในขั้นตอนการรายงานผลประจำเดือน โดยปรับให้ใช้ข้อมูลสารสนเทศที่ประมวลผลผ่านระบบ EduSmart Dashboard เป็นหลักฐานอ้างอิงในการประชุมผู้บริหารและครู
+            </li>
+            <li><strong>7.1.2 การพัฒนาศักยภาพบุคลากรและทีมขับเคลื่อน:</strong><br>
+                <strong>- แผนการพัฒนาบุคลากร:</strong> จัดอบรมเชิงปฏิบัติการ (Workshop) ภายในโรงเรียนแบบเพื่อนช่วยเพื่อน (PLC) แนะนำการเข้าถึงและการอ่านข้อมูลจาก Dashboard ให้แก่ครูที่ปรึกษาเพื่อให้สามารถนำข้อมูลไปใช้ดูแลนักเรียนได้อย่างมีประสิทธิภาพ<br>
+                <strong>- การจัดตั้งคณะทำงาน:</strong> จัดตั้ง "ทีมสารสนเทศอัจฉริยะ (Smart Data Team)" โดยมีตัวแทนจากฝ่ายบริหาร ครูคอมพิวเตอร์ และมีกลุ่มนักเรียนแกนนำ (Team: Bad GateWay) เป็นผู้ช่วยสนับสนุนด้านเทคนิคในการดูแลรักษาระบบร่วมด้วย
+            </li>
+        </ul>
 
-        <p class="bold pl-1 mt-1">7.3 แนวทางสร้างความยั่งยืนของนวัตกรรม (3 คะแนน)</p>
-        <div class="pl-2">
-            <p><span class="bold">7.3.1 การบูรณาการเข้าสู่แผนและนโยบายสถานศึกษา :</span> นำระบบนวัตกรรมปัญญาประดิษฐ์นี้บรรจุเป็นส่วนหนึ่งของ "โครงการพัฒนาระบบสารสนเทศและดูแลช่วยเหลือนักเรียน" ในแผนปฏิบัติการประจำปีของสถานศึกษา เพื่อให้มีโครงสร้างรองรับการทำงานอย่างเป็นทางการ</p>
-            <p><span class="bold">7.3.2 การจัดสรรทรัพยากรและงบประมาณอย่างต่อเนื่อง :</span> เน้นการใช้ทรัพยากรพื้นฐานที่โรงเรียนมีอยู่แล้วให้เกิดความคุ้มค่าสูงสุด ได้แก่ ระบบเครือข่าย Server และ Google Workspace แบบ Enterprise ของโรงเรียน ทำให้ระบบสามารถดำเนินการต่อไปได้ในระยะยาวโดยไม่ต้องพึ่งพางบประมาณจัดซื้อซอฟต์แวร์เพิ่มเติมจำนวนมาก</p>
-            <p><span class="bold">7.3.3 ระบบติดตาม ประเมินผล และปรับปรุงพัฒนา :</span> กรอบระยะเวลา: ดำเนินการประเมินผลความพึงพอใจและประสิทธิภาพการใช้งานระบบทุกสิ้นภาคเรียน กลไกการสะท้อนผล: ใช้กระบวนการ PLC ของกลุ่มครูที่ปรึกษาเป็นเวทีในการรับฟังข้อเสนอแนะ (Feedback) เพื่อนำมาปรับปรุงหน้าตาและฟีเจอร์ของ Dashboard ให้ตอบโจทย์การใช้งานจริงอยู่เสมอ</p>
-            <p><span class="bold">7.3.4 การกำกับดูแลด้านจริยธรรม ความปลอดภัย และการใช้ข้อมูล :</span> ปฏิบัติตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) อย่างเคร่งครัด ผลการประมวลผลกลุ่มเสี่ยงจากโมเดล AI (Predictive Modeling) จะถูกเก็บเป็นความลับระดับบุคคล โดยกำหนดสิทธิ์เข้าถึงข้อมูลให้เฉพาะครูที่ปรึกษาประจำชั้นและผู้บริหารระดับสูงเท่านั้น เพื่อป้องกันการตีตรา (Labeling) หรือการนำข้อมูลนักเรียนไปใช้ในทางที่ผิด</p>
-        </div>
+        <h3 class="subsection-title">7.2 แผนการขยายผลสู่เครือข่ายภายในหรือภายนอกสถานศึกษา (3 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>7.2.1 การเผยแพร่และถอดบทเรียนเชิงบริหาร:</strong> ถอดบทเรียนกระบวนการทำงานจัดทำเป็นคู่มือ "Smart School Data Framework ฉบับปฏิบัติจริง” เพื่อสรุปขั้นตอนการสร้าง Dashboard พื้นฐานสำหรับโรงเรียน เผยแพร่ผ่านเว็บไซต์ของโรงเรียนหารเทารังสีประชาสรรค์ (https://www.harnthao.ac.th)</li>
+            <li><strong>7.2.2 การสร้างความร่วมมือเชิงระบบ:</strong> เครือข่ายที่คาดว่าจะร่วมขยายผลคือกลุ่มโรงเรียนเครือข่ายในสังกัด สพม.พัทลุง โครงการมีแผนพัฒนาโมเดลนี้ให้เป็นรูปแบบ Open API เพื่อให้โรงเรียนเครือข่ายสามารถนำไปเชื่อมต่อและใช้งานได้ สร้างมาตรฐานการจัดการข้อมูลร่วมกันในปีการศึกษาหน้า</li>
+        </ul>
 
-        <!-- ภาคผนวก -->
-        <p class="bold mt-2 page-break">ภาคผนวก (ถ้ามี)</p>
-        <div class="pl-1">
-            <p>• แผนผังระบบ</p>
-            <p>• โครงสร้างฐานข้อมูล</p>
-            <p>• ตัวอย่างระบบที่พัฒนา เช่น Dashboard ฯลฯ</p>
-            <p>• แผนการประเมินผล</p>
-            <p>• เอกสารสนับสนุนอื่น ๆ</p>
-        </div>
+        <h3 class="subsection-title">7.3 แนวทางสร้างความยั่งยืนของนวัตกรรม (3 คะแนน)</h3>
+        <ul class="list-disc list-outside ml-6 space-y-2">
+            <li><strong>7.3.1 การบูรณาการเข้าสู่แผนและนโยบายสถานศึกษา:</strong> นำระบบนวัตกรรมปัญญาประดิษฐ์นี้บรรจุเป็นส่วนหนึ่งของ "โครงการพัฒนาระบบสารสนเทศและดูแลช่วยเหลือนักเรียน" ในแผนปฏิบัติการประจำปีของสถานศึกษา เพื่อให้มีโครงสร้างรองรับการทำงานอย่างเป็นทางการ</li>
+            <li><strong>7.3.2 การจัดสรรทรัพยากรและงบประมาณอย่างต่อเนื่อง:</strong> เน้นการใช้ทรัพยากรพื้นฐานที่โรงเรียนมีอยู่แล้วให้เกิดความคุ้มค่าสูงสุด ได้แก่ ระบบเครือข่าย Server และ Google Workspace แบบ Enterprise ของโรงเรียน ทำให้ระบบสามารถดำเนินการต่อไปได้ในระยะยาวโดยไม่ต้องพึ่งพางบประมาณจัดซื้อซอฟต์แวร์เพิ่มเติมจำนวนมาก</li>
+            <li><strong>7.3.3 ระบบติดตาม ประเมินผล และปรับปรุงพัฒนา:</strong> กรอบระยะเวลาดำเนินการประเมินผลความพึงพอใจและประสิทธิภาพการใช้งานระบบทุกสิ้นภาคเรียน กลไกการสะท้อนผลใช้กระบวนการ PLC ของกลุ่มครูที่ปรึกษาเป็นเวทีในการรับฟังข้อเสนอแนะ (Feedback) เพื่อนำมาปรับปรุงหน้าตาและฟีเจอร์ของ Dashboard ให้ตอบโจทย์การใช้งานจริงอยู่เสมอ</li>
+            <li><strong>7.3.4 การกำกับดูแลด้านจริยธรรม ความปลอดภัย และการใช้ข้อมูล:</strong> ปฏิบัติตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) อย่างเคร่งครัด ผลการประมวลผลกลุ่มเสี่ยงจากโมเดล AI (Predictive Modeling) จะถูกเก็บเป็นความลับระดับบุคคล โดยกำหนดสิทธิ์เข้าถึงข้อมูลให้เฉพาะครูที่ปรึกษาประจำชั้นและผู้บริหารระดับสูงเท่านั้น เพื่อป้องกันการตีตรา (Labeling) หรือการนำข้อมูลนักเรียนไปใช้ในทางที่ผิด</li>
+        </ul>
 
-        <!-- คำรับรองและลายเซ็น -->
-        <div class="avoid-break mt-3">
-            <p class="bold center">คำรับรอง</p>
-            <p class="indent mt-1">ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกเป็นความจริงทุกประการ และข้อเสนอโครงการที่ส่งเข้าร่วมการแข่งขันเป็นผลงานที่ทีมผู้สมัครพัฒนาขึ้นด้วยตนเอง ไม่ละเมิดทรัพย์สินทางปัญญา และยอมรับหลักเกณฑ์รวมถึงผลการตัดสินของคณะกรรมการทุกประการ</p>
+        <!-- Appendix & Signature -->
+        <div class="mt-12 bg-gray-50 border border-gray-200 p-6 rounded">
+            <h3 class="font-bold text-lg mb-3">ภาคผนวก (ถ้ามี)</h3>
+            <ul class="list-disc list-inside space-y-1 mb-8">
+                <li>แผนผังระบบ</li>
+                <li>โครงสร้างฐานข้อมูล</li>
+                <li>ตัวอย่างระบบที่พัฒนา เช่น Dashboard ฯลฯ</li>
+                <li>แผนการประเมินผล</li>
+                <li>เอกสารสนับสนุนอื่น ๆ</li>
+            </ul>
 
-            <div class="signature-section">
-                <p>ลงชื่อ ...................................................... (ผู้แทนทีม)</p>
-                <p>(นายสุทธิกมล บัวศรี)</p>
-                <p>ตำแหน่ง หัวหน้าผู้พัฒนา</p>
-                <p>วันที่ 6 เดือน เมษายน พ.ศ. 2569</p>
+            <div class="text-center mt-12 mb-6">
+                <h3 class="font-bold text-xl mb-4 text-gray-800">คำรับรอง</h3>
+                <p class="text-left mb-10 text-gray-700">ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกเป็นความจริงทุกประการ และข้อเสนอโครงการที่ส่งเข้าร่วมการแข่งขันเป็นผลงานที่ทีมผู้สมัครพัฒนาขึ้นด้วยตนเอง ไม่ละเมิดทรัพย์สินทางปัญญา และยอมรับหลักเกณฑ์รวมถึงผลการตัดสินของคณะกรรมการทุกประการ</p>
+                
+                <div class="flex justify-end mt-16">
+                    <div class="text-center w-64">
+                        <p class="mb-2">ลงชื่อ .................................................... (ผู้แทนทีม)</p>
+                        <p>(นายสุทธิกมล บัวศรี)</p>
+                        <p>ตำแหน่ง หัวหน้าผู้พัฒนา</p>
+                        <p>วันที่ 6 เดือน เมษายน พ.ศ. 2569</p>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
-
 </body>
 </html>
 
+```
